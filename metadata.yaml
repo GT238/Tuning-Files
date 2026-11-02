@@ -561,7 +561,8 @@ files:
     ecu: Car-LS
     os_id: "12587811"
     description: "Complete XDF definition for P01/P59 OS 12587811 (1MB PCM)"
-    source: "downloaded 2025-07-17 (per source folder name)"
+    source: "pcmhacking.net forum topic 7949 (files dated 2025-07-17)"
+    source_url: "https://pcmhacking.net/forums/viewtopic.php?t=7949"
     tags: [xdf, p01, p59, 1mb, ls]
     tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "Definition states 'Use only for OS 12587811 bins'. No bins for this OS in the archive yet. Pairs with the GM P01/P59 checksum plugin (deduplicated to GM/Car-LS/tools/)."
@@ -572,7 +573,8 @@ files:
     ecu: Car-LS
     os_id: "12605114"
     description: "Complete XDF definition for P01/P59 OS 12605114 (1MB PCM)"
-    source: "downloaded 2025-07-17 (per source folder name)"
+    source: "pcmhacking.net forum topic 7949 (files dated 2025-07-17)"
+    source_url: "https://pcmhacking.net/forums/viewtopic.php?t=7949"
     tags: [xdf, p01, p59, 1mb, ls]
     tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "Definition states 'Use only for OS 12605114 bins'. No bins for this OS in the archive yet. Pairs with the GM P01/P59 checksum plugin."
@@ -583,7 +585,8 @@ files:
     ecu: Car-LS
     os_id: "12606807"
     description: "Complete XDF definition for P01/P59 OS 12606807 (1MB PCM)"
-    source: "downloaded 2025-07-17 (per source folder name)"
+    source: "pcmhacking.net forum topic 7949 (files dated 2025-07-17)"
+    source_url: "https://pcmhacking.net/forums/viewtopic.php?t=7949"
     tags: [xdf, p01, p59, 1mb, ls]
     tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "Definition states 'Use only for OS 12606807 bins'. No bins for this OS in the archive yet. Pairs with the GM P01/P59 checksum plugin."
@@ -594,7 +597,8 @@ files:
     ecu: Car-LS
     os_id: "12613246"
     description: "Complete XDF definition for P01/P59 OS 12613246 (1MB PCM)"
-    source: "downloaded 2025-07-17 (per source folder name)"
+    source: "pcmhacking.net forum topic 7949 (files dated 2025-07-17)"
+    source_url: "https://pcmhacking.net/forums/viewtopic.php?t=7949"
     tags: [xdf, p01, p59, 1mb, ls]
     tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "Author typos inside the file: deftitle says '12587811 complete XDF' and the description's first line says OS 12623246 - the filename and the 'Use only for OS 12613246 bins' line agree on 12613246. Verify against a real 12613246 bin before tuning. Pairs with the GM P01/P59 checksum plugin."
@@ -605,7 +609,8 @@ files:
     ecu: Car-LS
     os_id: "12639623"
     description: "Complete XDF definition for P01/P59 OS 12639623 (1MB PCM)"
-    source: "downloaded 2025-07-17 (per source folder name)"
+    source: "pcmhacking.net forum topic 7949 (files dated 2025-07-17)"
+    source_url: "https://pcmhacking.net/forums/viewtopic.php?t=7949"
     tags: [xdf, p01, p59, 1mb, ls]
     tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "Definition states 'Use only for OS 12639623 bins'. No bins for this OS in the archive yet. Pairs with the GM P01/P59 checksum plugin."
@@ -615,7 +620,8 @@ files:
     manufacturer: GM
     ecu: Car-LS
     description: "GM P01/P59 checksum plugin - computes correct flash checksums for modified P01/P59 calibrations"
-    source: "bundled with the 2025-07-17 OS downloads"
+    source: "pcmhacking.net forum topic 7949 (bundled with the OS downloads)"
+    source_url: "https://pcmhacking.net/forums/viewtopic.php?t=7949"
     tags: [checksum, p01, p59, tool, dll]
     notes: "Windows PE DLL (11KB). One byte-identical copy was bundled into each of the five 2025-07-17 OS download folders - deduplicated to this single canonical copy. Applies to OSs 12587811, 12605114, 12606807, 12613246, 12639623 and other P01/P59 OSs. Third-party tool: scan before use; the site serves it strictly as a download."
 
