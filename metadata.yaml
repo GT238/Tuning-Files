@@ -5,11 +5,11 @@
 # size, sha256 and modified automatically -- do not add those here.
 #
 # Fields:
-#   path          (required) location under files/,
-#                 e.g. GM/E38/12600587/stock/12600587.bin
+#   path          (required) location under files/, e.g. GM/E38/12600587/stock/12600587.bin
 #   type          stock | tune | xdf | tool | doc | other
 #   manufacturer  GM, Ford, Chrysler, Dodge, Honda, ...
-#   ecu           ECU/PCM family, e.g. E38, E67, EEC-V, ME7.6
+#   ecu           ECU family, e.g. E38, E67, Car-LS, Car-V6, Duramax-LLY, TCM, Unverified
+#   module        PCM | ECM | TCM -- which module the file belongs to
 #   os_id         operating-system / flash ID of the calibration
 #   cal_id        calibration ID
 #   vehicle       e.g. "Chevrolet Silverado 1500"
@@ -25,32 +25,516 @@
 #   notes         anything else
 #
 # The build script warns about: files with no entry, entries with no file,
-# and xdf references pointing at files that are not in the archive.
-
-files: []
-
-# ---------------------------------------------------------------------------
-# Example entries -- uncomment and adapt once real files are in files/:
+# bad type values, xdf references pointing at missing files, claimed OS/CAL
+# IDs that are NOT embedded in the bin (mislabeled filename), and
+# byte-identical duplicate files (duplicate_of is set automatically).
 #
-# files:
-#   - path: GM/E38/12600587/stock/12600587_OS.bin
-#     type: stock
-#     manufacturer: GM
-#     ecu: E38
-#     os_id: "12600587"
-#     cal_id: "12600587"
-#     vehicle: "Chevrolet Silverado 1500 / 2500"
-#     engine: "6.0L LQ4 V8"
-#     years: "2007-2013"
-#     description: "Stock OS calibration pulled via EFILive"
-#     source: "own vehicle scan"
-#     verified: true
-#     tags: [ls, 6.0, efilive]
-#
-#   - path: GM/E38/12600587/xdf/12600587.xdf
-#     type: xdf
-#     manufacturer: GM
-#     ecu: E38
-#     description: "TunerPro/XFI definition for the 12600587 OS"
-#     source: "community share"
-# ---------------------------------------------------------------------------
+# --- 2004/2005 GM import (36 bins from the owner's collection) ---
+# Conventions for this batch: os_id = the ID embedded in the bin when present
+# (filename claim otherwise, flagged with an "ID?" badge on the site);
+# cal_id = the other embedded 8-digit number where OS/CAL is ambiguous;
+# files with odd sizes or unverifiable identity live under Unverified/.
+
+files:
+  # ============================== 2004 ===================================
+  - path: "GM/E38/12585950/stock/'04 Chevy 4x4 Half T 6.0L os12585950.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12585950"
+    vehicle: "Chevrolet Silverado 1500 4x4 (half ton) - per filename"
+    engine: "6.0L V8"
+    years: "2004"
+    description: "Stock PCM calibration, 2004 half-ton 4x4 6.0L"
+    source: "owner's collection"
+    tags: [6.0, 4x4, e38]
+    notes: "Half-ton 6.0L was not a regular 2004 production combo (6.0L was HD/1500HD duty) - verify application. Same OS 12585950 as two other 2004 files in this archive; distinct calibration (different SHA-256)."
+
+  - path: "GM/Car-LS/12587603/stock/'04 Corvette M6 os12587603.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-LS
+    module: PCM
+    os_id: "12587603"
+    vehicle: "Chevrolet Corvette (C5) - per filename, VERIFY"
+    engine: "5.7L V8 (LS1/LS6)"
+    years: "2004"
+    transmission: "6-speed manual"
+    description: "Stock PCM calibration labeled as 2004 Corvette M6"
+    source: "owner's collection"
+    tags: [corvette, ls, m6, verify-attribution]
+    notes: "OS 12587603 IS embedded in the bin - but the same OS ID is used by the 2004 GMC Sierra LM7 bin in this archive, and C5 Corvettes are not known to share truck OS IDs. Attribution (Corvette vs truck) unconfirmed - verify in TunerPro/EFILive before flashing."
+
+  - path: "GM/Car-LS/12592433/stock/'04 CTS-V LS6 M6 os12592433.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-LS
+    module: PCM
+    os_id: "12592433"
+    vehicle: "Cadillac CTS-V"
+    engine: "LS6 5.7L"
+    years: "2004"
+    transmission: "6-speed manual"
+    description: "Stock PCM calibration, 2004 CTS-V LS6 6-speed"
+    source: "owner's collection"
+    tags: [cts-v, ls6, m6]
+    notes: "OS 12592433 embedded (bin also references the 12592434/12592435/12592980 series). Application per filename."
+
+  - path: "GM/Car-LS/12587604/stock/'04 GTO M6 os12587604.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-LS
+    module: PCM
+    os_id: "12587604"
+    vehicle: "Pontiac GTO"
+    engine: "LS1 5.7L"
+    years: "2004"
+    transmission: "6-speed manual"
+    description: "Stock PCM calibration, 2004 GTO LS1 6-speed"
+    source: "owner's collection"
+    tags: [gto, ls1, m6]
+    notes: "OS 12587604 embedded. Byte-identical to 2005GTO_200572977.bin (that file's 2005/72977 label is wrong - see its entry)."
+
+  - path: "GM/E38/12585950/stock/04 Chevy 2500 4x4 LQ4 6.0L os12585950.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12585950"
+    vehicle: "Chevrolet Silverado 2500 4x4"
+    engine: "LQ4 6.0L"
+    years: "2004"
+    description: "Stock PCM calibration, 2004 Silverado 2500 4x4 6.0L"
+    source: "owner's collection"
+    tags: [lq4, 6.0, 4x4, e38]
+    notes: "Same OS 12585950 as the other two 2004 6.0L files; distinct calibration."
+
+  - path: "GM/E38/12585950/stock/04 Chevy half Ton 4x4 6.0L 12585950.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12585950"
+    vehicle: "Chevrolet Silverado 1500 4x4 (half ton) - per filename"
+    engine: "6.0L V8"
+    years: "2004"
+    description: "Stock PCM calibration, 2004 half-ton 4x4 6.0L"
+    source: "owner's collection"
+    tags: [6.0, 4x4, e38]
+    notes: "See the other two 12585950 entries - same OS, distinct calibration. Half-ton 6.0L labeling questionable for 2004; verify application."
+
+  - path: "GM/E38/unknown/stock/2004 Silverado 4X4 60 4L80.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    vehicle: "Chevrolet Silverado 4x4 (4L80E-equipped)"
+    engine: "6.0L V8"
+    years: "2004"
+    description: "Stock PCM calibration, 2004 Silverado 4x4 6.0L with 4L80E"
+    source: "owner's collection"
+    tags: [6.0, 4l80e, ambiguous-id, e38]
+    notes: "No OS ID in filename. Bin embeds 12585940 and 12586212 (and references 12587603/12587698) - OS identity ambiguous. 1MB E38-format PCM; the '4L80' in the name refers to the vehicle's transmission, not a TCM file. Verify OS/CAL in EFILive before use."
+
+  - path: "GM/Car-LS/12587604/stock/Read 2004 GTO.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-LS
+    module: PCM
+    os_id: "12587604"
+    vehicle: "Pontiac GTO"
+    engine: "LS1 5.7L"
+    years: "2004"
+    description: "Stock PCM calibration, 2004 GTO (second calibration, same OS)"
+    source: "owner's collection"
+    tags: [gto, ls1]
+    notes: "No IDs in filename; bin embeds OS 12587604 (same OS as '04 GTO M6) but different calibration bytes - distinct cal, same OS."
+
+  - path: "GM/E38/12587603/stock/Stock_2004_GMC_Sierra_1500_4x4_Lm7_4l60e_truck_copy(12587603).bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12587603"
+    vehicle: "GMC Sierra 1500 4x4"
+    engine: "LM7 5.3L"
+    years: "2004"
+    transmission: "4L60E"
+    description: "Stock PCM calibration, 2004 Sierra 1500 4x4 LM7 4L60E"
+    source: "community repost (per filename 'truck_copy')"
+    tags: [lm7, 5.3, 4x4, e38]
+    notes: "OS 12587603 embedded (matches filename). Note: the '04 Corvette bin in this archive carries the same OS ID - see that entry."
+
+  # ============================== 2005 ===================================
+  - path: "GM/Car-LS/12592618/stock/'05 Cadillac CTS-V LS6 M6 os12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-LS
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Cadillac CTS-V"
+    engine: "LS6 5.7L"
+    years: "2005"
+    transmission: "6-speed manual"
+    description: "Stock PCM calibration labeled as 2005 CTS-V LS6 6-speed"
+    source: "owner's collection"
+    tags: [cts-v, ls6, m6]
+    notes: "OS 12592618 embedded - the same OS used by the 2005 truck calibrations in this archive (GM shared OS numbers across platforms). Verify application via CAL ID before flashing."
+
+  - path: "GM/E38/12592618/stock/'05 Chevy 1500 4x4 os 12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Chevrolet Silverado 1500 4x4"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Silverado 1500 4x4"
+    source: "owner's collection"
+    tags: [4x4, e38]
+    notes: "Engine not stated in filename; OS 12592618 was shared across 4.8/5.3/6.0 2005 trucks - identify the exact calibration/application before flashing."
+
+  - path: "GM/E38/12592618/stock/'05 Chevy MPV  Half ton4x4 LM7 os 12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Chevrolet van (MPV) 4x4 - VERIFY"
+    engine: "LM7 5.3L"
+    years: "2005"
+    description: "Stock PCM calibration labeled as 2005 Chevy MPV half-ton 4x4 LM7"
+    source: "owner's collection"
+    tags: [lm7, 5.3, 4x4, mpv, verify-attribution]
+    notes: "MPV + 4x4 + LM7 combination is unusual (Astro/Safari were not factory 4x4) - may be a Suburban/Tahoe mislabeled. Verify."
+
+  - path: "GM/E38/12592618/stock/'05 Chevy MPV 4x2 1500 4.8L 12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Chevrolet Express 1500 4x2 (MPV)"
+    engine: "LR4 4.8L"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Express 1500 4x2 4.8L"
+    source: "owner's collection"
+    tags: [lr4, 4.8, mpv, e38]
+
+  - path: "GM/E38/12592618/stock/'05 GMC MPV 4x2 2500 6.0 LQ4 os12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "GMC Savana 2500 4x2 (MPV)"
+    engine: "LQ4 6.0L"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Savana 2500 4x2 6.0L"
+    source: "owner's collection"
+    tags: [lq4, 6.0, mpv, e38]
+
+  - path: "GM/E38/12592618/stock/'05Chevy 1500 4x44.8 LR4  12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Chevrolet Silverado 1500 4x4"
+    engine: "LR4 4.8L"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Silverado 1500 4x4 4.8L"
+    source: "owner's collection"
+    tags: [lr4, 4.8, 4x4, e38]
+
+  - path: "GM/E38/12592618/stock/05 Chevy 1500 4x2 LM7 12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Chevrolet Silverado 1500 4x2"
+    engine: "LM7 5.3L"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Silverado 1500 4x2 5.3L"
+    source: "owner's collection"
+    tags: [lm7, 5.3, 4x2, e38]
+
+  - path: "GM/E38/12592618/stock/05 Chevy 1500 4X4 6.0L  12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Chevrolet Silverado 1500 4x4 - per filename"
+    engine: "6.0L V8"
+    years: "2005"
+    description: "Stock PCM calibration labeled as 2005 Silverado 1500 4x4 6.0L"
+    source: "owner's collection"
+    tags: [6.0, 4x4, e38, verify-attribution]
+    notes: "Half-ton 6.0L was not a regular 2005 production combo (6.0L = 2500/3500 or 1500HD) - verify application; may be a 2500 mislabeled."
+
+  - path: "GM/E38/12592618/stock/05 Chevy 1500 4x4 MPV L59 12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Chevrolet Silverado 1500 4x4"
+    engine: "L59 5.3L flex-fuel"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Silverado 1500 4x4 L59"
+    source: "owner's collection"
+    tags: [l59, 5.3, 4x4, e38, e85]
+    notes: "L59 = flex-fuel 5.3L. 'MPV' in filename unexplained - verify application."
+
+  - path: "GM/E38/12592618/stock/05 Chevy 1Ton 6.0LQ4 12589463.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Chevrolet Silverado 3500 (1-ton)"
+    engine: "LQ4 6.0L"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Silverado 1-ton 6.0L"
+    source: "owner's collection"
+    tags: [lq4, 6.0, 1-ton, e38]
+    notes: "Filename claims OS 12589463 but that ID is NOT embedded in the bin; the bin embeds the 12592618 OS family. 12589463 may be the CAL ID. Verify."
+
+  - path: "GM/Unverified/unknown/stock/05 Escalade 4x4 6.0L os12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Unverified
+    module: PCM
+    vehicle: "Cadillac Escalade 4x4 - per filename"
+    engine: "6.0L V8"
+    years: "2005"
+    description: "Suspect file: 512KB, no embedded IDs"
+    source: "owner's collection"
+    tags: [escalade, suspect, odd-size]
+    notes: "Only 512KB (E38 truck PCMs are 1MB) and NO OS ID embedded anywhere in the file - cannot confirm the 12592618 claim. Possibly truncated, corrupt, or a different module entirely. Do not flash; verify first."
+
+  - path: "GM/E38/12592618/stock/05 Escalade 6.0L 4x4 os12592618 (1).bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Cadillac Escalade 4x4"
+    engine: "LQ4 6.0L"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Escalade 4x4 6.0L"
+    source: "owner's collection"
+    tags: [escalade, lq4, 6.0, 4x4, e38]
+    notes: "Windows '(1)' copy - byte-identical to the other Escalade bin in this archive (see duplicate link on the site)."
+
+  - path: "GM/E38/12592618/stock/05 Escalade 6.0L 4x4 os12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Cadillac Escalade 4x4"
+    engine: "LQ4 6.0L"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Escalade 4x4 6.0L"
+    source: "owner's collection"
+    tags: [escalade, lq4, 6.0, 4x4, e38]
+    notes: "OS 12592618 embedded. A byte-identical '(1)' copy also exists in the archive."
+
+  - path: "GM/E38/12592618/stock/05 Hummer H2 6.0 LQ4 os12592618.bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Hummer H2"
+    engine: "LQ4 6.0L"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Hummer H2 6.0L"
+    source: "owner's collection"
+    tags: [h2, lq4, 6.0, e38]
+
+  - path: "GM/Unverified/unknown/stock/05 TRAILBLAZER 5.3.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Unverified
+    vehicle: "Chevrolet TrailBlazer 5.3 - per filename"
+    engine: "5.3L V8"
+    years: "2005"
+    description: "Suspect file: nonstandard size, VIN-prefixed"
+    source: "owner's collection"
+    tags: [trailblazer, suspect, odd-size, vin]
+    notes: "Nonstandard size (1,278,976 bytes) and the file starts with VIN 1GNES16M956166626 - may be a TCM or combined flash image rather than a PCM calibration. Same VIN prefix as the Trailblazer TCM bin in this archive. Verify before use."
+
+  - path: "GM/Car-V6/12594527/stock/05_Impala_3400_LA1  os 12594527.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-V6
+    module: PCM
+    os_id: "12594527"
+    cal_id: "12594521"
+    vehicle: "Chevrolet Impala"
+    engine: "LA1 3.4L V6"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Impala 3.4L"
+    source: "owner's collection"
+    tags: [impala, la1, 3.4]
+    notes: "Filename ID 12594527 is NOT embedded; bin embeds 12594521 (likely the CAL ID - one of the two is the OS, the other the CAL). Verify in TunerPro. Byte-identical copy: 2005 Impala LA1 12594527.bin."
+
+  - path: "GM/TCM/n-a/stock/05TRAILBLAZER 5.3 TCM.bin"
+    type: stock
+    manufacturer: GM
+    ecu: GMT360 TCM
+    module: TCM
+    vehicle: "Chevrolet TrailBlazer 5.3 automatic"
+    years: "2005"
+    description: "Stock TCM calibration, 2005 TrailBlazer 5.3 auto"
+    source: "owner's collection"
+    tags: [tcm, trailblazer, vin]
+    notes: "TCM binary - starts with donor VIN 1GNES16M956166626. TCM calibrations are often VIN-bound and may not be reusable on another vehicle. Be aware of the embedded VIN when sharing."
+
+  - path: "GM/E38/12592618/stock/2005 2500expressDBC(12592618).bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "Chevrolet Express 2500"
+    engine: "6.0L V8 (per OS family)"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Express 2500"
+    source: "owner's collection"
+    tags: [express, 2500, 6.0, e38]
+    notes: "'DBC' suffix meaning unclear (possibly uploader tag). OS 12592618 embedded."
+
+  - path: "GM/E38/12592618/stock/2005 5.3 Auto 4wd stock .bin"
+    type: stock
+    manufacturer: GM
+    ecu: E38
+    module: PCM
+    os_id: "12592618"
+    vehicle: "GM truck (application unknown)"
+    engine: "5.3L V8 (LM7/LM4)"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 GM truck 5.3L auto 4wd"
+    source: "owner's collection"
+    tags: [5.3, 4wd, e38, generic-name]
+    notes: "Generic filename; OS 12592618 embedded. Identify the exact application via CAL ID before flashing."
+
+  - path: "GM/Car-V6/12594385/stock/2005 Grand Am GT LA1 12594385.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-V6
+    module: PCM
+    os_id: "12594385"
+    cal_id: "12594383"
+    vehicle: "Pontiac Grand Am GT"
+    engine: "LA1 3.4L V6"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Grand Am GT 3.4L"
+    source: "owner's collection"
+    tags: [grand-am, la1, 3.4]
+    notes: "Filename ID 12594385 NOT embedded; bin embeds 12594383 (likely the CAL ID). Verify which is OS vs CAL."
+
+  - path: "GM/Car-V6/12594527/stock/2005 Impala LA1 12594527.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-V6
+    module: PCM
+    os_id: "12594527"
+    cal_id: "12594521"
+    vehicle: "Chevrolet Impala"
+    engine: "LA1 3.4L V6"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Impala 3.4L"
+    source: "owner's collection"
+    tags: [impala, la1, 3.4]
+    notes: "Byte-identical to 05_Impala_3400_LA1 os 12594527.bin (duplicate link). Same OS/CAL ambiguity - see that entry."
+
+  - path: "GM/Duramax-LLY/15193885/stock/2005 LLY_15193885.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Duramax-LLY
+    module: ECM
+    os_id: "15193885"
+    vehicle: "Chevrolet/GMC 2500/3500 HD"
+    engine: "Duramax 6.6L LLY (diesel)"
+    years: "2005"
+    description: "Stock ECM calibration, 2005 Duramax LLY"
+    source: "owner's collection"
+    tags: [duramax, lly, diesel, 6.6]
+    notes: "Diesel ECM (Bosch common-rail) - outside EFILive/TunerPro LS tooling (HP Tuners territory). Bin embeds the 15193863-15193885 ID series including 15193885."
+
+  - path: "GM/Car-V6/12600191/stock/2005 Monte Carlo L67 12600191 (1).bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-V6
+    module: PCM
+    os_id: "12600191"
+    cal_id: "12600185"
+    vehicle: "Chevrolet Monte Carlo (SS)"
+    engine: "L67 3.8L supercharged V6"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Monte Carlo L67"
+    source: "owner's collection"
+    tags: [monte-carlo, l67, 3.8, supercharged]
+    notes: "Windows '(1)' copy - byte-identical to the other Monte Carlo bin. Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID)."
+
+  - path: "GM/Car-V6/12600191/stock/2005 Monte Carlo L67 12600191.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-V6
+    module: PCM
+    os_id: "12600191"
+    cal_id: "12600185"
+    vehicle: "Chevrolet Monte Carlo (SS)"
+    engine: "L67 3.8L supercharged V6"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Monte Carlo L67"
+    source: "owner's collection"
+    tags: [monte-carlo, l67, 3.8, supercharged]
+    notes: "Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID). Verify which is OS vs CAL."
+
+  - path: "GM/Unverified/12595726/stock/2005 TrailblazerI6Auto.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Unverified
+    os_id: "12595726"
+    vehicle: "Chevrolet TrailBlazer (I6)"
+    engine: "4.2L LLV I6"
+    years: "2005"
+    description: "Stock calibration labeled as 2005 TrailBlazer 4.2L I6 automatic"
+    source: "owner's collection"
+    tags: [trailblazer, llv, 4.2, odd-size]
+    notes: "OS 12595726 embedded, but file size is nonstandard (525,854 bytes vs expected 512KB/1MB) - possibly a wrapped or partial image. Verify integrity before use."
+
+  - path: "GM/Car-V6/12594380/stock/2005 Venture 3400 stock.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-V6
+    module: PCM
+    os_id: "12594380"
+    vehicle: "Chevrolet Venture"
+    engine: "3400 3.4L V6 (LA1)"
+    years: "2005"
+    description: "Stock PCM calibration, 2005 Venture 3.4L"
+    source: "owner's collection"
+    tags: [venture, la1, 3.4]
+    notes: "No OS ID in filename; 12594380 read from bin content."
+
+  - path: "GM/Car-LS/12587604/stock/2005GTO_200572977.bin"
+    type: stock
+    manufacturer: GM
+    ecu: Car-LS
+    module: PCM
+    os_id: "12587604"
+    vehicle: "Pontiac GTO (per bin content - see notes)"
+    engine: "LS1 5.7L"
+    years: "2004"
+    description: "Mislabeled download of the 2004 GTO calibration"
+    source: "owner's collection"
+    tags: [gto, ls1, mislabeled]
+    notes: "BYTE-IDENTICAL to '04 GTO M6 os12587604.bin - the '2005/72977' label is wrong (2005 GTO = LS2, a different engine). This is a mislabeled copy of the 2004 GTO calibration. The '04 file is canonical; this one can be deleted."

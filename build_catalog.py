@@ -3,7 +3,8 @@
 build_catalog.py -- generate a static, searchable catalog of ECU/PCM tuning files.
 
 Walks files/, merges human-curated metadata.yaml, computes SHA-256 checksums,
-and emits a static website (catalog/) with a JSON search index.
+verifies claimed OS/CAL IDs against the bin contents, detects byte-identical
+duplicates, and emits a static website (catalog/) with a JSON search index.
 
 Usage:
     python build_catalog.py                    # build from project root
@@ -28,10 +29,10 @@ except ImportError:
     sys.exit("PyYAML is required. Install it with:  pip install pyyaml")
 
 META_FIELDS = [
-    "type", "manufacturer", "ecu", "os_id", "cal_id",
+    "type", "manufacturer", "ecu", "module", "os_id", "cal_id",
     "vehicle", "engine", "years", "transmission",
     "description", "source", "source_url", "xdf", "tags",
-    "verified", "notes",
+    "verified", "notes", "duplicate_of",
 ]
 
 VALID_TYPES = {"stock", "tune", "xdf", "tool", "doc", "other"}
@@ -39,14 +40,6 @@ VALID_TYPES = {"stock", "tune", "xdf", "tool", "doc", "other"}
 
 def norm(p):
     return p.replace("\\", "/").strip().strip("/")
-
-
-def sha256_of(path, chunk_size=1024 * 1024):
-    h = hashlib.sha256()
-    with open(path, "rb") as f:
-        for chunk in iter(lambda: f.read(chunk_size), b""):
-            h.update(chunk)
-    return h.hexdigest()
 
 
 def load_metadata(path):
@@ -80,15 +73,16 @@ def scan_files(files_dir):
 
 
 def build_entries(found, metadata, files_url):
-    entries, missing, dangling = [], [], []
+    entries, missing, dangling, id_mismatch = [], [], [], []
     for rel, path in sorted(found.items()):
         meta = metadata.get(rel, {})
         st = path.stat()
+        data = path.read_bytes()
         e = {
             "path": rel,
             "name": Path(rel).name,
             "size": st.st_size,
-            "sha256": sha256_of(path),
+            "sha256": hashlib.sha256(data).hexdigest(),
             "modified": datetime.fromtimestamp(
                 st.st_mtime, tz=timezone.utc
             ).isoformat(timespec="seconds"),
@@ -101,12 +95,36 @@ def build_entries(found, metadata, files_url):
                 e[k] = meta[k]
         if e.get("type") and e["type"] not in VALID_TYPES:
             print(f"  WARNING: unknown type '{e['type']}' on {rel}")
+        # verify claimed IDs against bin content
+        for idk in ("os_id", "cal_id"):
+            claimed = e.get(idk)
+            if claimed:
+                embedded = str(claimed).encode() in data
+                e[idk + "_in_bin"] = embedded
+                if not embedded:
+                    id_mismatch.append((rel, idk, claimed))
         if e.get("xdf") and norm(e["xdf"]) not in found:
             dangling.append((rel, e["xdf"]))
         entries.append(e)
         if not meta:
             missing.append(rel)
-    return entries, missing, dangling
+    return entries, missing, dangling, id_mismatch
+
+
+def find_duplicates(entries):
+    """Flag byte-identical files; first non-'(1)' name becomes canonical."""
+    by_hash = {}
+    for e in entries:
+        by_hash.setdefault(e["sha256"], []).append(e)
+    groups = []
+    for group in by_hash.values():
+        if len(group) > 1:
+            group.sort(key=lambda e: ("(1)" in e["name"], e["path"]))
+            canonical = group[0]
+            for e in group[1:]:
+                e["duplicate_of"] = canonical["path"]
+            groups.append([e["path"] for e in group])
+    return groups
 
 
 def main():
@@ -129,7 +147,8 @@ def main():
 
     metadata = load_metadata(meta_path)
     found = scan_files(files_dir)
-    entries, missing, dangling = build_entries(found, metadata, a.files_url)
+    entries, missing, dangling, id_mismatch = build_entries(found, metadata, a.files_url)
+    dup_groups = find_duplicates(entries)
     orphans = sorted(set(metadata) - set(found))
 
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -156,22 +175,33 @@ def main():
     # ---- summary ----
     types = Counter(e.get("type", "unspecified") for e in entries)
     makers = Counter(e.get("manufacturer", "?") for e in entries)
-    print(f"Catalog built: {len(entries)} files -> {out_dir}/")
+    total_mb = sum(e["size"] for e in entries) / (1024 * 1024)
+    print(f"Catalog built: {len(entries)} files ({total_mb:.1f} MB) -> {out_dir}/")
     print("  by type: " + (", ".join(f"{k}={v}" for k, v in sorted(types.items())) or "-"))
     print("  makers:  " + (", ".join(f"{k}={v}" for k, v in sorted(makers.items())) or "-"))
+    if dup_groups:
+        print(f"\nByte-identical duplicate groups ({len(dup_groups)}):")
+        for g in dup_groups:
+            print(f"  canonical: {g[0]}")
+            for d in g[1:]:
+                print(f"    duplicate: {d}")
     if missing:
         print(f"\nFiles MISSING metadata ({len(missing)}):")
         for m in missing:
             print(f"  - {m}")
+    if id_mismatch:
+        print(f"\nClaimed IDs NOT found embedded in bin ({len(id_mismatch)}):")
+        for rel, idk, val in id_mismatch:
+            print(f"  - {rel}: {idk}={val}")
     if orphans:
         print(f"\nMetadata entries with NO matching file ({len(orphans)}):")
         for o in orphans:
             print(f"  - {o}")
     if dangling:
         print("\nDangling XDF references (xdf file not in archive):")
-        for src, xdf in dangling:
-            print(f"  - {src} -> {xdf}")
-    if entries and not missing and not orphans and not dangling:
+        for src_, xdf in dangling:
+            print(f"  - {src_} -> {xdf}")
+    if entries and not missing and not orphans and not dangling and not id_mismatch:
         print("All metadata checks passed.")
 
 

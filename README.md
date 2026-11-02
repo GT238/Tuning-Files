@@ -2,7 +2,8 @@
 
 A searchable, self-hosted archive of ECU/PCM tuning files: calibration `.bin`
 images, `.xdf` definitions, and user tunes. Multi-manufacturer (GM-heavy),
-covering both stock/reference calibrations and user-created tunes.
+covering both stock/reference calibrations and user-created tunes, for both
+PCM (engine) and TCM (transmission) modules.
 
 Built to outlive any single forum: files are checksummed, versioned in git,
 and served as a plain static site.
@@ -25,9 +26,13 @@ python -m http.server 8000       # local preview: http://localhost:8000/catalog/
 │   └── <Manufacturer>/<ECU family>/<OS or Cal ID>/{stock,tunes,xdf,...}/
 │       examples:
 │       GM/E38/12600587/stock/12600587_OS.bin
+│       GM/E38/12600587/tunes/12600587_stage1.bin
 │       GM/E38/12600587/xdf/12600587.xdf
-│       GM/E38/12600587/tunes/12600587_60hp_stage1.bin
-│       Ford/EECV/.../stock/...
+│       GM/Car-LS/...   (car LS1/LS2/LS6 modules)
+│       GM/Car-V6/...   (pushrod V6 car modules)
+│       GM/Duramax-LLY/...
+│       GM/TCM/...      (transmission modules)
+│       GM/Unverified/...  (odd sizes / unidentified -- do not flash)
 ├── templates/              # site templates (copied into catalog/ on each build)
 ├── catalog/                # GENERATED -- do not edit by hand (gitignored)
 │   ├── index.html  app.js  style.css
@@ -36,15 +41,21 @@ python -m http.server 8000       # local preview: http://localhost:8000/catalog/
 └── deploy/                 # nginx config + deploy script for the Hetzner server
 ```
 
+The `<ECU family>` segment is free-form. Use what the community uses
+(`E38`, `E67`, `Car-LS`, `TCM`, ...). When a file's identity is uncertain,
+park it under `Unverified/` rather than guessing -- a wrong ID in the path
+is worse than an obvious "we don't know yet".
+
 ## Daily workflow
 
 1. Drop files into `files/` following the layout above. Keep stock calibrations
-   and user tunes in separate subfolders. Name bins with their OS/cal ID when known.
+   and user tunes in separate subfolders. Keep original filenames (provenance).
 2. Add one entry per file to `metadata.yaml` (see the commented examples there).
    Files without an entry still appear on the site, flagged **needs info** in red.
 3. Run `python build_catalog.py`. It prints warnings for: files missing metadata,
-   metadata entries with no file, bad `type` values, and `xdf` references pointing
-   at files not in the archive.
+   metadata entries with no file, bad `type` values, dangling `xdf` references,
+   claimed OS/CAL IDs that are **not embedded in the bin** (a strong sign the
+   filename is wrong), and byte-identical duplicate files.
 4. Deploy: `bash deploy/deploy.sh` (or rsync manually, see below).
 
 ## Metadata schema
@@ -54,8 +65,10 @@ python -m http.server 8000       # local preview: http://localhost:8000/catalog/
 | `path` | yes | location under `files/`, forward slashes |
 | `type` | yes | `stock` \| `tune` \| `xdf` \| `tool` \| `doc` \| `other` |
 | `manufacturer` | yes | `GM`, `Ford`, `Chrysler`, ... |
-| `ecu` | yes | ECU family, e.g. `E38`, `E67`, `EEC-V`, `ME7.6` |
+| `ecu` | yes | ECU family, e.g. `E38`, `E67`, `Car-LS`, `EEC-V`, `ME7.6` |
+| `module` | recommended | `PCM` \| `ECM` \| `TCM` -- which module the file belongs to |
 | `os_id` / `cal_id` | when known | OS/flash ID and calibration ID |
+| `module`... | | (see above) |
 | `vehicle` / `engine` / `years` | recommended | what the calibration belongs to |
 | `description` | recommended | short human notes |
 | `source` / `source_url` | recommended | provenance -- where the file came from |
@@ -63,6 +76,22 @@ python -m http.server 8000       # local preview: http://localhost:8000/catalog/
 | `tags` | optional | free-form keywords |
 | `verified` | optional | `true` if checksum confirmed against known-good copy |
 | `notes` | optional | anything else |
+
+`duplicate_of` is set automatically by the generator for byte-identical files
+(never edit it by hand). The generator also records `os_id_in_bin` /
+`cal_id_in_bin` -- whether the claimed IDs actually appear as text inside the
+bin -- and flags mismatches. A green **verified** badge on the site means
+`verified: true`; everything else should be treated as "trust but verify".
+
+## Trust & verification
+
+- Every file gets a SHA-256 at build time; the site shows a truncated hash with
+  a copy button, and `catalog/sha256sums.txt` lists them all.
+- Claimed OS/CAL IDs are checked against the bin's actual contents. Filenames
+  in the wild are frequently mislabeled (wrong OS number, wrong vehicle) --
+  the **ID?** badge marks files where the claimed ID is not embedded.
+- TCM bins (and some ECM bins) can contain the **VIN of the donor vehicle**
+  embedded in the file. That's normal, but be aware when sharing.
 
 ## Deploying to the Hetzner server
 

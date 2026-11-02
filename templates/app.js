@@ -1,6 +1,6 @@
 "use strict";
 
-const state = { files: [], q: "", maker: "all", type: "all", sort: "path", needsOnly: false, filesUrl: "/files/" };
+const state = { files: [], byPath: {}, q: "", maker: "all", type: "all", sort: "path", needsOnly: false, filesUrl: "/files/" };
 
 const el = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({
@@ -24,7 +24,7 @@ function badge(t) {
 }
 
 function haystack(f) {
-  return [f.name, f.path, f.manufacturer, f.ecu, f.os_id, f.cal_id,
+  return [f.name, f.path, f.manufacturer, f.ecu, f.module, f.os_id, f.cal_id,
           f.vehicle, f.engine, f.years, f.transmission, f.description,
           (f.tags || []).join(" ")].join(" ").toLowerCase();
 }
@@ -52,24 +52,37 @@ function xdfUrl(f) {
   return state.filesUrl + f.xdf.split("/").map(encodeURIComponent).join("/");
 }
 
+function idCell(f) {
+  let html = `<span class="mono">${esc([f.os_id, f.cal_id].filter(Boolean).join(" / ") || "—")}</span>`;
+  if (f.os_id && f.os_id_in_bin === false) {
+    html += ` <span class="badge t-missing" title="OS ID from metadata not found as text inside the bin — filename may be wrong, verify before use">ID?</span>`;
+  }
+  return html;
+}
+
 function rowHtml(f) {
   const vehicle = [f.vehicle, f.engine, f.years].filter(Boolean);
-  const ids = [f.os_id, f.cal_id].filter(Boolean);
+  const canon = f.duplicate_of ? state.byPath[f.duplicate_of] : null;
+  const dup = f.duplicate_of
+    ? `<div class="sub"><a class="dup-link" href="${esc(canon ? canon.download_url : "#")}" title="Byte-identical to this file">⧉ duplicate of ${esc(f.duplicate_of.split("/").pop())}</a></div>`
+    : "";
   return `<tr>
     <td class="file">${badge(f.type)}<br>
       <a href="${esc(f.download_url)}" download title="${esc(f.path)}">${esc(f.name)}</a>
       <div class="path">${esc(f.path)}</div>
       ${f.needs_metadata ? '<span class="badge t-missing">needs info</span>' : ""}
+      ${f.verified ? '<span class="badge t-stock">verified</span>' : ""}
     </td>
     <td>${esc(vehicle.join(" · ") || "—")}</td>
-    <td>${esc([f.manufacturer, f.ecu].filter(Boolean).join(" / ") || "—")}</td>
-    <td class="mono">${esc(ids.join(" / ") || "—")}</td>
+    <td>${esc([f.manufacturer, f.ecu, f.module].filter(Boolean).join(" / ") || "—")}</td>
+    <td>${idCell(f)}</td>
     <td class="num">${humanSize(f.size)}</td>
     <td class="mono hash"><span title="${esc(f.sha256)}">${esc(f.sha256.slice(0, 12))}…</span>
       <button class="copy" data-hash="${esc(f.sha256)}" title="Copy full SHA-256">copy</button></td>
     <td class="notes">${esc(f.description || "")}
       ${f.xdf ? ` <a class="xdf-link" href="${esc(xdfUrl(f))}" title="Compatible XDF definition">⧉ XDF</a>` : ""}
       ${f.source ? `<div class="sub">source: ${esc(f.source)}</div>` : ""}
+      ${dup}
       ${f.notes ? `<div class="sub">${esc(f.notes)}</div>` : ""}
     </td>
   </tr>`;
@@ -126,6 +139,7 @@ fetch("index.json")
   .then(data => {
     state.files = data.files || [];
     state.filesUrl = data.files_url || "/files/";
+    state.byPath = Object.fromEntries(state.files.map(f => [f.path, f]));
     el("generated").textContent = "Catalog generated " + (data.generated || "");
     populateFilters(state.files);
     wire();
