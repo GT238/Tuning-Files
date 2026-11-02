@@ -64,6 +64,7 @@ files:
     description: "Stock PCM calibration labeled as 2004 Corvette M6"
     source: "owner's collection"
     tags: [corvette, ls, m6, verify-attribution]
+    tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "OS 12587603 is embedded in the bin. That OS is shared across cars and trucks (OSs are year/platform-wide, not vehicle-specific - see the README primer), and this file differs from the 2004 Sierra LM7 bin on the same OS - different calibration bytes, consistent with a different vehicle application of one OS. Attribution per filename; confirm the CAL ID in TunerPro/EFILive before flashing."
 
   - path: "GM/Car-LS/12592433/stock/'04 CTS-V LS6 M6 os12592433.bin"
@@ -79,6 +80,7 @@ files:
     description: "Stock PCM calibration, 2004 CTS-V LS6 6-speed"
     source: "owner's collection"
     tags: [cts-v, ls6, m6]
+    tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "OS 12592433 embedded (bin also references the 12592434/12592435/12592980 series). Application per filename."
 
   - path: "GM/Car-LS/12587604/stock/'04 GTO M6 os12587604.bin"
@@ -94,6 +96,7 @@ files:
     description: "Stock PCM calibration, 2004 GTO LS1 6-speed"
     source: "owner's collection"
     tags: [gto, ls1, m6]
+    tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "OS 12587604 embedded. Byte-identical to 2005GTO_200572977.bin (that file's 2005/72977 label is wrong - see its entry)."
 
   - path: "GM/E38/12585950/stock/04 Chevy 2500 4x4 LQ4 6.0L os12585950.bin"
@@ -149,6 +152,7 @@ files:
     description: "Stock PCM calibration, 2004 GTO (second calibration, same OS)"
     source: "owner's collection"
     tags: [gto, ls1]
+    tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "No IDs in filename; bin embeds OS 12587604 (same OS as '04 GTO M6) but different calibration bytes - distinct cal, same OS."
 
   - path: "GM/E38/12587603/stock/Stock_2004_GMC_Sierra_1500_4x4_Lm7_4l60e_truck_copy(12587603).bin"
@@ -181,6 +185,7 @@ files:
     description: "Stock PCM calibration labeled as 2005 CTS-V LS6 6-speed"
     source: "owner's collection"
     tags: [cts-v, ls6, m6]
+    tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "OS 12592618 embedded - the same OS used by the 2005 truck calibrations in this archive (GM shared OS numbers across platforms). Verify application via CAL ID before flashing."
 
   - path: "GM/E38/12592618/stock/'05 Chevy 1500 4x4 os 12592618.bin"
@@ -552,6 +557,7 @@ files:
     description: "Mislabeled download of the 2004 GTO calibration"
     source: "owner's collection"
     tags: [gto, ls1, mislabeled]
+    tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "BYTE-IDENTICAL to '04 GTO M6 os12587604.bin - the '2005/72977' label is wrong (2005 GTO = LS2, a different engine). This is a mislabeled copy of the 2004 GTO calibration. The '04 file is canonical; this one can be deleted."
 
   # ============ XDF definitions + checksum plugin (from "Downloaded FIles", 2025-07-17) =========
@@ -606,7 +612,7 @@ files:
     source_url: "https://pcmhacking.net/forums/viewtopic.php?t=7949"
     tags: [xdf, p59, 2006, ls]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
-    notes: "DISCREPANCY: Phoenix's post lists this OS as 12629623, but the filename, deftitle and 'use only for' line all say 12613246 - one of them has a typo (Phoenix re-uploaded corrected files several times, so the current file may simply carry a fixed number). Verify against a real 12613246/12629623 bin before tuning. Posted by Phoenix in pcmhacking.net topic 7949 ('2006 P59 XDF Files Inside'). Based on the 12587603 XDF that many contributors worked on - Phoenix credits the community for the base. Post edit history: v2.0+ corrections include transmission gear ratio table + B3627/B3628 (04/17/25), VATS settings verified with EFILive (04/06/23), transient fuel parameters added (09/19/22); post warns to delete anything older than v2.0. 2006 P59 OS per the post title - one OS serves many 2006 cars and trucks (OSs are year/platform-wide, not vehicle-specific). No bins for this OS in the archive yet; pairs with the GM P01/P59 checksum plugin."
+    notes: "CAUTION: Phoenix's post lists this OS as 12629623 while the file itself says 12613246 everywhere (filename, deftitle, 'use only for' line). Both OS numbers appear to be real, so this is an unresolved ambiguity - not a proven typo. Confirm which OS the file actually defines before tuning with it. Posted by Phoenix in pcmhacking.net topic 7949 ('2006 P59 XDF Files Inside'). Based on the 12587603 XDF that many contributors worked on - Phoenix credits the community for the base. Post edit history: v2.0+ corrections include transmission gear ratio table + B3627/B3628 (04/17/25), VATS settings verified with EFILive (04/06/23), transient fuel parameters added (09/19/22); post warns to delete anything older than v2.0. 2006 P59 OS per the post title - one OS serves many 2006 cars and trucks (OSs are year/platform-wide, not vehicle-specific). No bins for this OS in the archive yet; pairs with the GM P01/P59 checksum plugin."
   - path: "GM/P59/12639623/xdf/12639623 OS 2025-07-17.xdf"
     type: xdf
     manufacturer: GM
@@ -625,10 +631,11 @@ files:
     manufacturer: GM
     ecu: P01/P59
     description: "GM P01/P59 checksum plugin - computes correct flash checksums for modified P01/P59 calibrations"
+    author: "Jouko Y (joukoy@gmail.com)"
     source: "bundled with Phoenix's 2006 P59 XDF downloads (pcmhacking topic 7949)"
     source_url: "https://pcmhacking.net/forums/viewtopic.php?t=7949"
     tags: [checksum, p01, p59, tool, dll]
-    notes: "Windows PE DLL (11KB). One byte-identical copy was bundled into each of the five 2025-07-17 OS download folders - deduplicated to this single canonical copy. Applies to P01/P59 OSs including 12587811, 12605114, 12606807, 12613246, 12639623. Plugin author not stated in the source post; it circulated inside Phoenix's XDF set. Third-party tool: scan before use; the site serves it strictly as a download."
+    notes: "Windows PE DLL (11KB, v0.1.1, by Jouko Y - author/version read from the DLL strings). One byte-identical copy was bundled into each of the five 2025-07-17 OS download folders - deduplicated to this single canonical copy. Algorithm-based, no OS whitelist: covers ALL P01/P59 512kB and 1MB bin sizes, not just Phoenix's five OSs - so it applies to the 2004-2005 Car-LS bins (Corvette, GTOs, CTS-Vs) already in the archive. Exports the MMCSCalculateChecksum interface (TunerPro RT checksum-plugin standard). Not for E38 trucks, Duramax or TCMs. Third-party tool: scan before use; the site serves it strictly as a download."
   - path: "GM/E38/12587603/xdf/12587603 - 2004 1mb.xdf"
     type: xdf
     manufacturer: GM
