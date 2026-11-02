@@ -677,7 +677,8 @@ files:
     ecu: E38
     os_id: "12587603"
     description: "TunerPro/XFI definition for OS 12587603 (1Mb PCM, 2004) - compact revision"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, e38, 1mb, 2004]
     notes: "One of four definitions for OS 12587603 in this batch (823KB) - the other three are 'Release', 'Latest Release' and the 'Operating System ...' series file."
 
@@ -687,7 +688,8 @@ files:
     ecu: E38
     os_id: "12587603"
     description: "TunerPro/XFI definition for OS 12587603 (1Mb PCM, 2004) - release revision"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, e38, 1mb, 2004]
     notes: "Mid-size revision (1.8MB) of the 12587603 definition; see the other three 12587603 files for alternatives."
 
@@ -697,7 +699,8 @@ files:
     ecu: E38
     os_id: "12587603"
     description: "TunerPro/XFI definition for OS 12587603 (1Mb PCM, 2004) - latest release revision"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, e38, 1mb, 2004]
     notes: "Largest revision (2MB) of the 12587603 definition - likely the most complete; compare coverage in TunerPro before relying on it."
 
@@ -707,7 +710,8 @@ files:
     ecu: E38
     os_id: "12587603"
     description: "TunerPro/XFI definition for OS 12587603 (1Mb PCM, 2004 model year)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, e38, 1mb, 2004]
     notes: "Canonical 'Operating System' series naming. This is the definition linked from the 2004 Sierra LM7 bin in this archive."
 
@@ -717,7 +721,8 @@ files:
     ecu: E38
     os_id: "12592618"
     description: "TunerPro/XFI definition for OS 12592618 (1Mb PCM, 2005)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, e38, 1mb, 2005]
     notes: "Unusually compact (44KB) for a full E38 definition - 'VR1' is likely a revision tag. Verify table coverage in TunerPro. Linked from all 2005 E38/12592618 bins in this archive."
 
@@ -727,7 +732,8 @@ files:
     ecu: 512K-PCM
     os_id: "12202088"
     description: "TunerPro/XFI definition for OS 12202088 (512Kb PCM, 2001)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, 2001]
     notes: "512Kb PCM generation (2001-2002 trucks). No bins for this OS in the archive yet - definition is ready for when they arrive."
 
@@ -737,7 +743,8 @@ files:
     ecu: 512K-PCM
     os_id: "12208322"
     description: "TunerPro/XFI definition for OS 12208322 (512Kb PCM, 2001)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, 2001]
     notes: "512Kb PCM generation. No bins for this OS in the archive yet."
 
@@ -747,7 +754,8 @@ files:
     ecu: 512K-PCM
     os_id: "12209203"
     description: "TunerPro/XFI definition for OS 12209203 (512Kb PCM, 2002)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, 2002]
     notes: "512Kb PCM generation. No bins for this OS in the archive yet."
 
@@ -757,7 +765,8 @@ files:
     ecu: 512K-PCM
     os_id: "12212156"
     description: "TunerPro/XFI definition for OS 12212156 (512Kb PCM, 2002)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, 2002]
     notes: "Standard definition for OS 12212156; a separate V6-variant definition (OS12212156 - v6) is also in the archive. The Lean Cruise patch also covers this OS."
 
@@ -767,7 +776,8 @@ files:
     ecu: 512K-PCM
     os_id: "12212156"
     description: "TunerPro/XFI definition for OS 12212156 (512Kb PCM, 2002) - V6 variant"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, 2002, v6]
     notes: "V6-specific variant for the same OS as the standard 12212156 definition - different memory map/tables, both kept."
 
@@ -777,7 +787,8 @@ files:
     ecu: 512K-PCM
     os_id: "12216125"
     description: "TunerPro/XFI definition for OS 12216125 (512Kb PCM, 2002) - 5.3L flex-fuel and 8.1L"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, 2002, flex-fuel, 8.1]
     notes: "Covers 5.3L flex-fuel and 8.1L applications. No bins for this OS in the archive yet."
 
@@ -787,7 +798,8 @@ files:
     ecu: 512K-PCM
     os_id: "12221588"
     description: "TunerPro/XFI definition for OS 12221588 (512Kb PCM, Corvette 2001-2003)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, corvette, 2001, 2002, 2003]
     notes: "Corvette C5 application. Same file size as the 12593358 Corvette definition but different content (different OS). No bins yet."
 
@@ -797,7 +809,8 @@ files:
     ecu: 512K-PCM
     os_id: "12225074"
     description: "TunerPro/XFI definition for OS 12225074 (512Kb PCM, Holden 2001-2004)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, holden]
     notes: "Holden (Australia) applications 2001-2004. The COS 3 definition is based on this OS. No bins yet."
 
@@ -807,7 +820,8 @@ files:
     ecu: 512K-PCM
     os_id: "1250001"
     description: "COS 1 combined definition for 512Kb PCM (2001), based on OS 12202088"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, 2001, cos]
     notes: "'COS' = community combined/modified operating system definition, based on OS 12202088. Verify differences vs the base definition before tuning."
 
@@ -817,7 +831,8 @@ files:
     ecu: 512K-PCM
     os_id: "1290003"
     description: "COS 3 combined definition for 512Kb PCM, based on OS 12225074 (Holden 2001-2004)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, holden, cos]
     notes: "'COS' = community combined/modified operating system definition, based on OS 12225074 (Holden). Verify differences vs the base definition."
 
@@ -827,7 +842,8 @@ files:
     ecu: 512K-PCM
     os_id: "12593358"
     description: "TunerPro/XFI definition for OS 12593358 (512Kb PCM, Corvette 2001-2003)"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, corvette, 2001, 2002, 2003]
     notes: "Corvette C5 application, later OS than 12221588. No bins yet."
 
@@ -836,6 +852,7 @@ files:
     manufacturer: GM
     ecu: Various
     description: "Lean cruise patch definition covering OS 12212156, 12587603 and 12587604"
-    source: "Bin Definitions folder (community definitions)"
+    source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [xdf, patch, lean-cruise]
     notes: "Small patch definition (~2KB) - lean cruise tables only, not a full definition. Covers OS 12212156, 12587603 and 12587604; use alongside the full definition for the OS you are tuning."
