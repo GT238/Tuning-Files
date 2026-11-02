@@ -29,7 +29,7 @@
 # IDs that are NOT embedded in the bin (mislabeled filename), and
 # byte-identical duplicate files (duplicate_of is set automatically).
 #
-# --- 2004/2005 GM import (36 bins from the owner's collection) ---
+# --- 2004/2005 GM import (36 bins downloaded from gearhead-efi.com) ---
 # Conventions for this batch: os_id = the ID embedded in the bin when present
 # (filename claim otherwise, flagged with an "ID?" badge on the site);
 # cal_id = the other embedded 8-digit number where OS/CAL is ambiguous;
@@ -47,7 +47,8 @@ files:
     engine: "6.0L V8"
     years: "2004"
     description: "Stock PCM calibration, 2004 half-ton 4x4 6.0L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [6.0, 4x4, e38]
     notes: "Half-ton 6.0L was not a regular 2004 production combo (6.0L was HD/1500HD duty) - verify application. Same OS 12585950 as two other 2004 files in this archive; distinct calibration (different SHA-256)."
 
@@ -62,7 +63,8 @@ files:
     years: "2004"
     transmission: "6-speed manual"
     description: "Stock PCM calibration labeled as 2004 Corvette M6"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [corvette, ls, m6, verify-attribution]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "OS 12587603 is embedded in the bin. That OS is shared across cars and trucks (OSs are year/platform-wide, not vehicle-specific - see the README primer), and this file differs from the 2004 Sierra LM7 bin on the same OS - different calibration bytes, consistent with a different vehicle application of one OS. Attribution per filename; confirm the CAL ID in TunerPro/EFILive before flashing."
@@ -78,7 +80,8 @@ files:
     years: "2004"
     transmission: "6-speed manual"
     description: "Stock PCM calibration, 2004 CTS-V LS6 6-speed"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [cts-v, ls6, m6]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "OS 12592433 embedded (bin also references the 12592434/12592435/12592980 series). Application per filename."
@@ -94,7 +97,8 @@ files:
     years: "2004"
     transmission: "6-speed manual"
     description: "Stock PCM calibration, 2004 GTO LS1 6-speed"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [gto, ls1, m6]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "OS 12587604 embedded. Byte-identical to 2005GTO_200572977.bin (that file's 2005/72977 label is wrong - see its entry)."
@@ -109,7 +113,8 @@ files:
     engine: "LQ4 6.0L"
     years: "2004"
     description: "Stock PCM calibration, 2004 Silverado 2500 4x4 6.0L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [lq4, 6.0, 4x4, e38]
     notes: "Same OS 12585950 as the other two 2004 6.0L files; distinct calibration."
 
@@ -123,7 +128,8 @@ files:
     engine: "6.0L V8"
     years: "2004"
     description: "Stock PCM calibration, 2004 half-ton 4x4 6.0L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [6.0, 4x4, e38]
     notes: "See the other two 12585950 entries - same OS, distinct calibration. Half-ton 6.0L labeling questionable for 2004; verify application."
 
@@ -136,7 +142,8 @@ files:
     engine: "6.0L V8"
     years: "2004"
     description: "Stock PCM calibration, 2004 Silverado 4x4 6.0L with 4L80E"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [6.0, 4l80e, ambiguous-id, e38]
     notes: "No OS ID in filename. Bin embeds 12585940 and 12586212 (and references 12587603/12587698) - OS identity ambiguous. 1MB E38-format PCM; the '4L80' in the name refers to the vehicle's transmission, not a TCM file. Verify OS/CAL in EFILive before use."
 
@@ -150,7 +157,8 @@ files:
     engine: "LS1 5.7L"
     years: "2004"
     description: "Stock PCM calibration, 2004 GTO (second calibration, same OS)"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [gto, ls1]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "No IDs in filename; bin embeds OS 12587604 (same OS as '04 GTO M6) but different calibration bytes - distinct cal, same OS."
@@ -183,7 +191,8 @@ files:
     years: "2005"
     transmission: "6-speed manual"
     description: "Stock PCM calibration labeled as 2005 CTS-V LS6 6-speed"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [cts-v, ls6, m6]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "OS 12592618 embedded - the same OS used by the 2005 truck calibrations in this archive (GM shared OS numbers across platforms). Verify application via CAL ID before flashing."
@@ -198,7 +207,8 @@ files:
     vehicle: "Chevrolet Silverado 1500 4x4"
     years: "2005"
     description: "Stock PCM calibration, 2005 Silverado 1500 4x4"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [4x4, e38]
     notes: "Engine not stated in filename; OS 12592618 was shared across 4.8/5.3/6.0 2005 trucks - identify the exact calibration/application before flashing."
 
@@ -213,7 +223,8 @@ files:
     engine: "LM7 5.3L"
     years: "2005"
     description: "Stock PCM calibration labeled as 2005 Chevy MPV half-ton 4x4 LM7"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [lm7, 5.3, 4x4, mpv, verify-attribution]
     notes: "MPV + 4x4 + LM7 combination is unusual (Astro/Safari were not factory 4x4) - may be a Suburban/Tahoe mislabeled. Verify."
 
@@ -228,7 +239,8 @@ files:
     engine: "LR4 4.8L"
     years: "2005"
     description: "Stock PCM calibration, 2005 Express 1500 4x2 4.8L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [lr4, 4.8, mpv, e38]
 
   - path: "GM/E38/12592618/stock/'05 GMC MPV 4x2 2500 6.0 LQ4 os12592618.bin"
@@ -242,7 +254,8 @@ files:
     engine: "LQ4 6.0L"
     years: "2005"
     description: "Stock PCM calibration, 2005 Savana 2500 4x2 6.0L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [lq4, 6.0, mpv, e38]
 
   - path: "GM/E38/12592618/stock/'05Chevy 1500 4x44.8 LR4  12592618.bin"
@@ -256,7 +269,8 @@ files:
     engine: "LR4 4.8L"
     years: "2005"
     description: "Stock PCM calibration, 2005 Silverado 1500 4x4 4.8L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [lr4, 4.8, 4x4, e38]
 
   - path: "GM/E38/12592618/stock/05 Chevy 1500 4x2 LM7 12592618.bin"
@@ -270,7 +284,8 @@ files:
     engine: "LM7 5.3L"
     years: "2005"
     description: "Stock PCM calibration, 2005 Silverado 1500 4x2 5.3L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [lm7, 5.3, 4x2, e38]
 
   - path: "GM/E38/12592618/stock/05 Chevy 1500 4X4 6.0L  12592618.bin"
@@ -284,7 +299,8 @@ files:
     engine: "6.0L V8"
     years: "2005"
     description: "Stock PCM calibration labeled as 2005 Silverado 1500 4x4 6.0L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [6.0, 4x4, e38, verify-attribution]
     notes: "Half-ton 6.0L was not a regular 2005 production combo (6.0L = 2500/3500 or 1500HD) - verify application; may be a 2500 mislabeled."
 
@@ -299,7 +315,8 @@ files:
     engine: "L59 5.3L flex-fuel"
     years: "2005"
     description: "Stock PCM calibration, 2005 Silverado 1500 4x4 L59"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [l59, 5.3, 4x4, e38, e85]
     notes: "L59 = flex-fuel 5.3L. 'MPV' in filename unexplained - verify application."
 
@@ -314,7 +331,8 @@ files:
     engine: "LQ4 6.0L"
     years: "2005"
     description: "Stock PCM calibration, 2005 Silverado 1-ton 6.0L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [lq4, 6.0, 1-ton, e38]
     notes: "Filename claims OS 12589463 but that ID is NOT embedded in the bin; the bin embeds the 12592618 OS family. 12589463 may be the CAL ID. Verify."
 
@@ -327,7 +345,8 @@ files:
     engine: "6.0L V8"
     years: "2005"
     description: "Suspect file: 512KB, no embedded IDs"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [escalade, suspect, odd-size]
     notes: "Only 512KB (E38 truck PCMs are 1MB) and NO OS ID embedded anywhere in the file - cannot confirm the 12592618 claim. Possibly truncated, corrupt, or a different module entirely. Do not flash; verify first."
 
@@ -342,7 +361,8 @@ files:
     engine: "LQ4 6.0L"
     years: "2005"
     description: "Stock PCM calibration, 2005 Escalade 4x4 6.0L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [escalade, lq4, 6.0, 4x4, e38]
     notes: "Windows '(1)' copy - byte-identical to the other Escalade bin in this archive (see duplicate link on the site)."
 
@@ -357,7 +377,8 @@ files:
     engine: "LQ4 6.0L"
     years: "2005"
     description: "Stock PCM calibration, 2005 Escalade 4x4 6.0L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [escalade, lq4, 6.0, 4x4, e38]
     notes: "OS 12592618 embedded. A byte-identical '(1)' copy also exists in the archive."
 
@@ -372,7 +393,8 @@ files:
     engine: "LQ4 6.0L"
     years: "2005"
     description: "Stock PCM calibration, 2005 Hummer H2 6.0L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [h2, lq4, 6.0, e38]
 
   - path: "GM/Unverified/unknown/stock/05 TRAILBLAZER 5.3.bin"
@@ -383,7 +405,8 @@ files:
     engine: "5.3L V8"
     years: "2005"
     description: "Suspect file: nonstandard size, VIN-prefixed"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [trailblazer, suspect, odd-size, vin]
     notes: "Nonstandard size (1,278,976 bytes) and the file starts with VIN 1GNES16M956166626 - may be a TCM or combined flash image rather than a PCM calibration. Same VIN prefix as the Trailblazer TCM bin in this archive. Verify before use."
 
@@ -398,7 +421,8 @@ files:
     engine: "LA1 3.4L V6"
     years: "2005"
     description: "Stock PCM calibration, 2005 Impala 3.4L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [impala, la1, 3.4]
     notes: "Filename ID 12594527 is NOT embedded; bin embeds 12594521 (likely the CAL ID - one of the two is the OS, the other the CAL). Verify in TunerPro. Byte-identical copy: 2005 Impala LA1 12594527.bin."
 
@@ -410,7 +434,8 @@ files:
     vehicle: "Chevrolet TrailBlazer 5.3 automatic"
     years: "2005"
     description: "Stock TCM calibration, 2005 TrailBlazer 5.3 auto"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [tcm, trailblazer, vin]
     notes: "TCM binary - starts with donor VIN 1GNES16M956166626. TCM calibrations are often VIN-bound and may not be reusable on another vehicle. Be aware of the embedded VIN when sharing."
 
@@ -425,7 +450,8 @@ files:
     engine: "6.0L V8 (per OS family)"
     years: "2005"
     description: "Stock PCM calibration, 2005 Express 2500"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [express, 2500, 6.0, e38]
     notes: "'DBC' suffix meaning unclear (possibly uploader tag). OS 12592618 embedded."
 
@@ -440,7 +466,8 @@ files:
     engine: "5.3L V8 (LM7/LM4)"
     years: "2005"
     description: "Stock PCM calibration, 2005 GM truck 5.3L auto 4wd"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [5.3, 4wd, e38, generic-name]
     notes: "Generic filename; OS 12592618 embedded. Identify the exact application via CAL ID before flashing."
 
@@ -455,7 +482,8 @@ files:
     engine: "LA1 3.4L V6"
     years: "2005"
     description: "Stock PCM calibration, 2005 Grand Am GT 3.4L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [grand-am, la1, 3.4]
     notes: "Filename ID 12594385 NOT embedded; bin embeds 12594383 (likely the CAL ID). Verify which is OS vs CAL."
 
@@ -470,7 +498,8 @@ files:
     engine: "LA1 3.4L V6"
     years: "2005"
     description: "Stock PCM calibration, 2005 Impala 3.4L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [impala, la1, 3.4]
     notes: "Byte-identical to 05_Impala_3400_LA1 os 12594527.bin (duplicate link). Same OS/CAL ambiguity - see that entry."
 
@@ -484,7 +513,8 @@ files:
     engine: "Duramax 6.6L LLY (diesel)"
     years: "2005"
     description: "Stock ECM calibration, 2005 Duramax LLY"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [duramax, lly, diesel, 6.6]
     notes: "Diesel ECM (Bosch common-rail) - outside EFILive/TunerPro LS tooling (HP Tuners territory). Bin embeds the 15193863-15193885 ID series including 15193885."
 
@@ -499,7 +529,8 @@ files:
     engine: "L67 3.8L supercharged V6"
     years: "2005"
     description: "Stock PCM calibration, 2005 Monte Carlo L67"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [monte-carlo, l67, 3.8, supercharged]
     notes: "Windows '(1)' copy - byte-identical to the other Monte Carlo bin. Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID)."
 
@@ -514,7 +545,8 @@ files:
     engine: "L67 3.8L supercharged V6"
     years: "2005"
     description: "Stock PCM calibration, 2005 Monte Carlo L67"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [monte-carlo, l67, 3.8, supercharged]
     notes: "Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID). Verify which is OS vs CAL."
 
@@ -527,7 +559,8 @@ files:
     engine: "4.2L LLV I6"
     years: "2005"
     description: "Stock calibration labeled as 2005 TrailBlazer 4.2L I6 automatic"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [trailblazer, llv, 4.2, odd-size]
     notes: "OS 12595726 embedded, but file size is nonstandard (525,854 bytes vs expected 512KB/1MB) - possibly a wrapped or partial image. Verify integrity before use."
 
@@ -541,7 +574,8 @@ files:
     engine: "3400 3.4L V6 (LA1)"
     years: "2005"
     description: "Stock PCM calibration, 2005 Venture 3.4L"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [venture, la1, 3.4]
     notes: "No OS ID in filename; 12594380 read from bin content."
 
@@ -555,7 +589,8 @@ files:
     engine: "LS1 5.7L"
     years: "2004"
     description: "Mislabeled download of the 2004 GTO calibration"
-    source: "owner's collection"
+    source: "downloaded from gearhead-efi.com (owner's collection)"
+    source_url: "https://www.gearhead-efi.com"
     tags: [gto, ls1, mislabeled]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "BYTE-IDENTICAL to '04 GTO M6 os12587604.bin - the '2005/72977' label is wrong (2005 GTO = LS2, a different engine). This is a mislabeled copy of the 2004 GTO calibration. The '04 file is canonical; this one can be deleted."
