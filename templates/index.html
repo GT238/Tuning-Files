@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuning Files Archive — ECU/PCM calibration &amp; XDF library</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Tuning Files Archive</h1>
+  <p class="tagline">A searchable library of ECU/PCM calibration files (.bin), XDF definitions, and tunes.</p>
+</header>
+
+<main>
+  <section id="controls">
+    <input id="search" type="search"
+           placeholder="Search file name, vehicle, engine, OS ID, cal ID, tag&hellip;"
+           autocomplete="off" autofocus>
+    <div class="filters">
+      <select id="f-maker"><option value="all">All manufacturers</option></select>
+      <select id="f-type"><option value="all">All types</option></select>
+      <select id="sort">
+        <option value="path">Sort: manufacturer / ECU / name</option>
+        <option value="size-desc">Sort: largest first</option>
+        <option value="size-asc">Sort: smallest first</option>
+        <option value="newest">Sort: newest first</option>
+      </select>
+      <label class="needs"><input type="checkbox" id="f-needs"> only files needing metadata</label>
+    </div>
+  </section>
+
+  <p id="count"></p>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>File</th><th>Vehicle</th><th>ECU</th>
+          <th>OS / Cal ID</th><th class="num">Size</th>
+          <th>SHA-256</th><th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p id="empty" hidden></p>
+  </div>
+</main>
+
+<footer>
+  <p>Always verify a download against its SHA-256 checksum before flashing.
+     Checksums for every file are listed in <code>sha256sums.txt</code> at the archive root.</p>
+  <p class="legal">Calibration files are the property of their respective manufacturers and are shared
+     here for personal / educational use only. If you own a copyright to any file here and want it
+     removed, <a href="mailto:admin@example.com">contact the site admin</a>.</p>
+  <p id="generated"></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

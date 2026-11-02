@@ -1,0 +1,11 @@
+# generated site -- always rebuild from files/ + metadata.yaml
+catalog/
+
+# python cruft
+__pycache__/
+*.pyc
+.venv/
+
+# local scratch
+_test*/
+_testmeta.yaml

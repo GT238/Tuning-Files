@@ -1,0 +1,56 @@
+# Metadata for the tuning file archive.
+#
+# One entry per file under files/. The "path" must match the file's location
+# relative to files/, using forward slashes. The build script fills in
+# size, sha256 and modified automatically -- do not add those here.
+#
+# Fields:
+#   path          (required) location under files/,
+#                 e.g. GM/E38/12600587/stock/12600587.bin
+#   type          stock | tune | xdf | tool | doc | other
+#   manufacturer  GM, Ford, Chrysler, Dodge, Honda, ...
+#   ecu           ECU/PCM family, e.g. E38, E67, EEC-V, ME7.6
+#   os_id         operating-system / flash ID of the calibration
+#   cal_id        calibration ID
+#   vehicle       e.g. "Chevrolet Silverado 1500"
+#   engine        e.g. "6.0L LQ4 V8"
+#   years         "2007-2013"
+#   transmission  optional, e.g. "4L65E/4L70E"
+#   description   short human notes
+#   source        where the file came from (own scan, forum user, ... )
+#   source_url    optional link
+#   xdf           path (relative to files/) of a compatible XDF definition
+#   tags          free-form keywords
+#   verified      true if the checksum was confirmed against a known-good copy
+#   notes         anything else
+#
+# The build script warns about: files with no entry, entries with no file,
+# and xdf references pointing at files that are not in the archive.
+
+files: []
+
+# ---------------------------------------------------------------------------
+# Example entries -- uncomment and adapt once real files are in files/:
+#
+# files:
+#   - path: GM/E38/12600587/stock/12600587_OS.bin
+#     type: stock
+#     manufacturer: GM
+#     ecu: E38
+#     os_id: "12600587"
+#     cal_id: "12600587"
+#     vehicle: "Chevrolet Silverado 1500 / 2500"
+#     engine: "6.0L LQ4 V8"
+#     years: "2007-2013"
+#     description: "Stock OS calibration pulled via EFILive"
+#     source: "own vehicle scan"
+#     verified: true
+#     tags: [ls, 6.0, efilive]
+#
+#   - path: GM/E38/12600587/xdf/12600587.xdf
+#     type: xdf
+#     manufacturer: GM
+#     ecu: E38
+#     description: "TunerPro/XFI definition for the 12600587 OS"
+#     source: "community share"
+# ---------------------------------------------------------------------------
