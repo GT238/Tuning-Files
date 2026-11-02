@@ -140,6 +140,24 @@ cd files && sha256sum -c ../catalog/sha256sums.txt
 On Windows: `certutil -hashfile somefile.bin SHA256` and compare with the
 checksum shown on the site (click "copy" next to any row).
 
+## GM OS vs CAL — why the archive is filed by OS
+
+GM calibrations are two layers: the **OS** (operating system — the firmware base)
+and the **CAL** (calibration — the vehicle/engine-specific parameters). In
+practice:
+
+- An OS ID is **year/platform-wide, not vehicle-specific**. The same OS (e.g.
+  12587603, "7603") ships in cars *and* trucks; one OS serves many vehicles.
+- What distinguishes a Silverado from a Corvette on the same OS is the **CAL ID**.
+- So "same OS, different bytes" between two bins is *normal* — it means two
+  applications, not a mislabeled file.
+
+The archive's folder taxonomy (`<ecu>/<os-id>/...`) mirrors this: bins group by
+OS, and the metadata's `cal_id` field carries the application-specific part.
+When adding bins, always record the CAL ID if you can get it (EFILive/TunerPro
+show it; for many bins it's also embedded as text — the generator verifies the
+OS ID this way). A bin without a CAL ID is only half-identified.
+
 ## XDF definitions
 
 Definitions live alongside the bins they apply to (`files/<...>/xdf/`) and appear in the **same catalog** with an XDF badge — one search results page, not a separate section. Bins link to their definition (⧉ XDF chip); definition rows show "used by" links back to the bins they apply to. Search an OS ID (e.g. `12592618`) to see the calibrations and their definition together.
