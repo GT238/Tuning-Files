@@ -48,8 +48,19 @@ function filtered() {
   return out.sort(sorts[state.sort] || sorts.path);
 }
 
-function xdfUrl(f) {
-  return state.filesUrl + f.xdf.split("/").map(encodeURIComponent).join("/");
+function refUrl(refPath) {
+  const t = state.byPath[refPath];
+  if (t) return t.download_url;
+  return state.filesUrl + refPath.split("/").map(encodeURIComponent).join("/");
+}
+
+function chips(f) {
+  let html = "";
+  if (f.xdf) html += ` <a class="xdf-link" href="${esc(refUrl(f.xdf))}" title="Compatible XDF definition">⧉ XDF</a>`;
+  for (const t of (f.tools || [])) {
+    html += ` <a class="xdf-link" href="${esc(refUrl(t))}" title="Related tool: ${esc(t.split("/").pop())}">⛭ tool</a>`;
+  }
+  return html;
 }
 
 function idCell(f) {
@@ -88,10 +99,10 @@ function rowHtml(f) {
     <td class="mono hash"><span title="${esc(f.sha256)}">${esc(f.sha256.slice(0, 12))}…</span>
       <button class="copy" data-hash="${esc(f.sha256)}" title="Copy full SHA-256">copy</button></td>
     <td class="notes">${esc(f.description || "")}
-      ${f.xdf ? ` <a class="xdf-link" href="${esc(xdfUrl(f))}" title="Compatible XDF definition">⧉ XDF</a>` : ""}
+      ${chips(f)}
       ${f.source ? `<div class="sub">source: ${esc(f.source)}</div>` : ""}
       ${dup}
-      ${f.type === "xdf" ? usedByCell(f) : ""}
+      ${usedByCell(f)}
       ${f.notes ? `<div class="sub">${esc(f.notes)}</div>` : ""}
     </td>
   </tr>`;
@@ -151,7 +162,10 @@ fetch("index.json")
     state.byPath = Object.fromEntries(state.files.map(f => [f.path, f]));
     state.usedBy = {};
     for (const f of state.files) {
-      if (f.xdf) (state.usedBy[f.xdf] = state.usedBy[f.xdf] || []).push(f);
+      const refs = [];
+      if (f.xdf) refs.push(f.xdf);
+      if (Array.isArray(f.tools)) refs.push(...f.tools);
+      for (const r of refs) (state.usedBy[r] = state.usedBy[r] || []).push(f);
     }
     el("generated").textContent = "Catalog generated " + (data.generated || "");
     populateFilters(state.files);

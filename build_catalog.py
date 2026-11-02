@@ -31,7 +31,7 @@ except ImportError:
 META_FIELDS = [
     "type", "manufacturer", "ecu", "module", "os_id", "cal_id",
     "vehicle", "engine", "years", "transmission",
-    "description", "source", "source_url", "xdf", "tags",
+    "description", "source", "source_url", "xdf", "tools", "tags",
     "verified", "notes", "duplicate_of",
 ]
 
@@ -106,6 +106,9 @@ def build_entries(found, metadata, files_url):
                     id_mismatch.append((rel, idk, claimed))
         if e.get("xdf") and norm(e["xdf"]) not in found:
             dangling.append((rel, e["xdf"]))
+        for t in (e.get("tools") or []):
+            if norm(t) not in found:
+                dangling.append((rel, t))
         entries.append(e)
         if not meta:
             missing.append(rel)
@@ -199,9 +202,9 @@ def main():
         for o in orphans:
             print(f"  - {o}")
     if dangling:
-        print("\nDangling XDF references (xdf file not in archive):")
-        for src_, xdf in dangling:
-            print(f"  - {src_} -> {xdf}")
+        print("\nDangling XDF/tools references (target not in archive):")
+        for src_, tgt in dangling:
+            print(f"  - {src_} -> {tgt}")
     if entries and not missing and not orphans and not dangling and not id_mismatch:
         print("All metadata checks passed.")
 

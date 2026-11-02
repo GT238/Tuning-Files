@@ -73,6 +73,7 @@ is worse than an obvious "we don't know yet".
 | `description` | recommended | short human notes |
 | `source` / `source_url` | recommended | provenance -- where the file came from |
 | `xdf` | optional | path of a compatible XDF (linked from the site) |
+| `tools` | optional | list of paths of related tools (checksum plugins etc.), linked from the site |
 | `tags` | optional | free-form keywords |
 | `verified` | optional | `true` if checksum confirmed against known-good copy |
 | `notes` | optional | anything else |

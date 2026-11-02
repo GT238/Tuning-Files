@@ -554,6 +554,71 @@ files:
     tags: [gto, ls1, mislabeled]
     notes: "BYTE-IDENTICAL to '04 GTO M6 os12587604.bin - the '2005/72977' label is wrong (2005 GTO = LS2, a different engine). This is a mislabeled copy of the 2004 GTO calibration. The '04 file is canonical; this one can be deleted."
 
+  # ============ XDF definitions + checksum plugin (from "Downloaded FIles", 2025-07-17) =========
+  - path: "GM/Car-LS/12587811/xdf/12587811 OS 2025-07-17.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: Car-LS
+    os_id: "12587811"
+    description: "Complete XDF definition for P01/P59 OS 12587811 (1MB PCM)"
+    source: "downloaded 2025-07-17 (per source folder name)"
+    tags: [xdf, p01, p59, 1mb, ls]
+    tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
+    notes: "Definition states 'Use only for OS 12587811 bins'. No bins for this OS in the archive yet. Pairs with the GM P01/P59 checksum plugin (deduplicated to GM/Car-LS/tools/)."
+
+  - path: "GM/Car-LS/12605114/xdf/12605114 OS 2025-07-17.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: Car-LS
+    os_id: "12605114"
+    description: "Complete XDF definition for P01/P59 OS 12605114 (1MB PCM)"
+    source: "downloaded 2025-07-17 (per source folder name)"
+    tags: [xdf, p01, p59, 1mb, ls]
+    tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
+    notes: "Definition states 'Use only for OS 12605114 bins'. No bins for this OS in the archive yet. Pairs with the GM P01/P59 checksum plugin."
+
+  - path: "GM/Car-LS/12606807/xdf/12606807 OS 2025-07-17.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: Car-LS
+    os_id: "12606807"
+    description: "Complete XDF definition for P01/P59 OS 12606807 (1MB PCM)"
+    source: "downloaded 2025-07-17 (per source folder name)"
+    tags: [xdf, p01, p59, 1mb, ls]
+    tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
+    notes: "Definition states 'Use only for OS 12606807 bins'. No bins for this OS in the archive yet. Pairs with the GM P01/P59 checksum plugin."
+
+  - path: "GM/Car-LS/12613246/xdf/12613246 OS 2025-07-17.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: Car-LS
+    os_id: "12613246"
+    description: "Complete XDF definition for P01/P59 OS 12613246 (1MB PCM)"
+    source: "downloaded 2025-07-17 (per source folder name)"
+    tags: [xdf, p01, p59, 1mb, ls]
+    tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
+    notes: "Author typos inside the file: deftitle says '12587811 complete XDF' and the description's first line says OS 12623246 - the filename and the 'Use only for OS 12613246 bins' line agree on 12613246. Verify against a real 12613246 bin before tuning. Pairs with the GM P01/P59 checksum plugin."
+
+  - path: "GM/Car-LS/12639623/xdf/12639623 OS 2025-07-17.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: Car-LS
+    os_id: "12639623"
+    description: "Complete XDF definition for P01/P59 OS 12639623 (1MB PCM)"
+    source: "downloaded 2025-07-17 (per source folder name)"
+    tags: [xdf, p01, p59, 1mb, ls]
+    tools: ["GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"]
+    notes: "Definition states 'Use only for OS 12639623 bins'. No bins for this OS in the archive yet. Pairs with the GM P01/P59 checksum plugin."
+
+  - path: "GM/Car-LS/tools/GM-P01-P59-checksum-plugin.dll"
+    type: tool
+    manufacturer: GM
+    ecu: Car-LS
+    description: "GM P01/P59 checksum plugin - computes correct flash checksums for modified P01/P59 calibrations"
+    source: "bundled with the 2025-07-17 OS downloads"
+    tags: [checksum, p01, p59, tool, dll]
+    notes: "Windows PE DLL (11KB). One byte-identical copy was bundled into each of the five 2025-07-17 OS download folders - deduplicated to this single canonical copy. Applies to OSs 12587811, 12605114, 12606807, 12613246, 12639623 and other P01/P59 OSs. Third-party tool: scan before use; the site serves it strictly as a download."
+
 
   # ============================== XDF definitions (from "Bin Definitions" folder) =========
   - path: "GM/E38/12587603/xdf/12587603 - 2004 1mb.xdf"
