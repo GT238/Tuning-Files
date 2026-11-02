@@ -72,6 +72,7 @@ is worse than an obvious "we don't know yet".
 | `vehicle` / `engine` / `years` | recommended | what the calibration belongs to |
 | `description` | recommended | short human notes |
 | `source` / `source_url` | recommended | provenance -- where the file came from |
+| `author` | optional | who made the file (XDF author, tuner) -- credit where due |
 | `xdf` | optional | path of a compatible XDF (linked from the site) |
 | `tools` | optional | list of paths of related tools (checksum plugins etc.), linked from the site |
 | `tags` | optional | free-form keywords |
