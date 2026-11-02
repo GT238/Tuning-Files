@@ -82,6 +82,13 @@ a { color: var(--accent); }
 
 #empty { color: var(--muted); padding: 24px 12px; }
 
+.submit-line { margin: 8px 0 0; font-size: .9rem; }
+.submit-btn {
+  display: inline-block; background: var(--accent); color: #14161a;
+  font-weight: 600; padding: 3px 10px; border-radius: 6px; text-decoration: none;
+}
+.submit-btn:hover { filter: brightness(1.1); }
+
 footer {
   max-width: 1400px; margin: 0 auto; padding: 16px 20px 40px;
   color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line);
