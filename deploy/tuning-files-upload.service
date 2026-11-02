@@ -1,0 +1,14 @@
+[Unit]
+Description=Tuning Files Archive - submission server (upload + review queue)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/tuning-files
+EnvironmentFile=/srv/tuning-files/app.env
+ExecStart=/usr/bin/python3 /srv/tuning-files/app.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

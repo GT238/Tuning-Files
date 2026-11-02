@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submission review — Tuning Files Archive</title>
+<style>
+  body { font-family:"Segoe UI", system-ui, sans-serif; background:#14161a; color:#e8eaed;
+         max-width: 900px; margin:0 auto; padding:24px 16px 60px; }
+  h1 { font-size:1.4rem; } a { color:#f5a623; }
+  .card { background:#1d2026; border:1px solid #2c313a; border-radius:8px;
+          padding:14px 16px; margin:14px 0; }
+  .card h2 { font-size:1.05rem; margin:0 0 6px; word-break:break-all; }
+  table.kv { border-collapse:collapse; font-size:.85rem; margin:6px 0 10px; }
+  table.kv td { padding:2px 10px 2px 0; vertical-align:top; }
+  table.kv td.k { color:#9aa0a8; white-space:nowrap; }
+  .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:.7rem;
+           font-weight:600; text-transform:uppercase; color:#fff; margin-left:4px; }
+  .b-new { background:#4f9ddb; } .b-dup { background:#c94f4f; }
+  .b-ok { background:#3fa46a; } .b-warn { background:#e8833a; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px 16px; }
+  label { display:block; font-size:.8rem; color:#9aa0a8; margin:6px 0 2px; }
+  input[type=text], textarea { width:100%; box-sizing:border-box; padding:6px 8px;
+    background:#14161a; color:#e8eaed; border:1px solid #2c313a; border-radius:6px; font-size:.85rem; }
+  button { padding:6px 14px; border-radius:6px; border:none; font-size:.85rem; cursor:pointer; }
+  .pub { background:#3fa46a; color:#fff; font-weight:600; }
+  .rej { background:#3a3f47; color:#e8eaed; }
+  .flash { border-radius:6px; padding:8px 12px; margin:8px 0; font-size:.85rem; }
+  .flash.ok { background:#1d3a24; border:1px solid #3fa46a; }
+  .flash.error { background:#3a1d1d; border:1px solid #c94f4f; }
+  .fine { font-size:.8rem; color:#9aa0a8; }
+  code { background:#14161a; padding:1px 5px; border-radius:4px; font-size:.78rem; }
+</style>
+</head>
+<body>
+<h1>Submission review queue</h1>
+<p class="fine"><a href="/">← catalog</a> &nbsp;·&nbsp; {{ items|length }} pending</p>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for cat, msg in messages %}
+    <p class="flash {{ cat }}">{{ msg }}</p>
+  {% endfor %}
+{% endwith %}
+
+{% if not items %}
+<p>Nothing in the inbox. Submissions from <a href="/submit">/submit</a> appear here.</p>
+{% endif %}
+
+{% for it in items %}
+<div class="card">
+  <h2>{{ it.original_name }}
+    {% if it.checks.duplicate_of %}<span class="badge b-dup">duplicate</span>
+    {% else %}<span class="badge b-new">new</span>{% endif %}
+  </h2>
+  <table class="kv">
+    <tr><td class="k">saved as</td><td><code>{{ it.saved_name }}</code></td></tr>
+    <tr><td class="k">submitted</td><td>{{ it.submitted }}
+        {% if it.form.contact %} · by {{ it.form.contact }}{% endif %}</td></tr>
+    <tr><td class="k">type</td><td>{{ it.form.type }} · {{ it.form.manufacturer }}
+        {% if it.form.ecu %}/ {{ it.form.ecu }}{% endif %}
+        {% if it.form.module %}/ {{ it.form.module }}{% endif %}</td></tr>
+    {% if it.form.os_id %}<tr><td class="k">OS ID</td><td>{{ it.form.os_id }}
+        {% if it.checks.os_id_in_bin is defined %}
+          {% if it.checks.os_id_in_bin %}<span class="badge b-ok">embedded ✓</span>
+          {% else %}<span class="badge b-warn">not in bin — verify</span>{% endif %}
+        {% endif %}</td></tr>{% endif %}
+    {% if it.form.cal_id %}<tr><td class="k">CAL ID</td><td>{{ it.form.cal_id }}
+        {% if it.checks.cal_id_in_bin is defined %}
+          {% if it.checks.cal_id_in_bin %}<span class="badge b-ok">embedded ✓</span>
+          {% else %}<span class="badge b-warn">not in bin — verify</span>{% endif %}
+        {% endif %}</td></tr>{% endif %}
+    <tr><td class="k">vehicle</td><td>{{ it.form.vehicle }}</td></tr>
+    {% if it.form.engine %}<tr><td class="k">engine</td><td>{{ it.form.engine }}</td></tr>{% endif %}
+    {% if it.form.years %}<tr><td class="k">years</td><td>{{ it.form.years }}</td></tr>{% endif %}
+    {% if it.form.transmission %}<tr><td class="k">transmission</td><td>{{ it.form.transmission }}</td></tr>{% endif %}
+    {% if it.form.description %}<tr><td class="k">description</td><td>{{ it.form.description }}</td></tr>{% endif %}
+    <tr><td class="k">source</td><td>{{ it.form.source }}
+        {% if it.form.source_url %}<a href="{{ it.form.source_url }}">{{ it.form.source_url }}</a>{% endif %}</td></tr>
+    {% if it.form.tags %}<tr><td class="k">tags</td><td>{{ it.form.tags }}</td></tr>{% endif %}
+    <tr><td class="k">checks</td><td>sha256 <code>{{ it.checks.sha256[:16] }}…</code> ·
+        {{ it.checks.size }} bytes
+        {% if it.checks.duplicate_of %} · <span class="badge b-dup">identical to {{ it.checks.duplicate_of }}</span>{% endif %}
+    </td></tr>
+  </table>
+
+  <form method="post" action="/review/publish">
+    <input type="hidden" name="key" value="{{ key }}">
+    <input type="hidden" name="saved_name" value="{{ it.saved_name }}">
+    <div class="grid">
+      <div>
+        <label>Target folder (under files/)</label>
+        <input type="text" name="target_dir" value="{{ it.suggest_dir }}">
+      </div>
+      <div>
+        <label>Filename</label>
+        <input type="text" name="target_name" value="{{ it.suggest_name }}">
+      </div>
+    </div>
+    <div class="grid">
+      <div>
+        <label>Vehicle (editable)</label>
+        <input type="text" name="vehicle" value="{{ it.form.vehicle }}">
+      </div>
+      <div>
+        <label>Engine (editable)</label>
+        <input type="text" name="engine" value="{{ it.form.engine }}">
+      </div>
+    </div>
+    <label>Description (editable)</label>
+    <input type="text" name="description" value="{{ it.form.description }}">
+    <label>Extra notes for the metadata (optional)</label>
+    <input type="text" name="notes" placeholder="e.g. confirmed OS ID with submitter">
+    <p class="fine">Publishing moves the file into the archive, appends the entry to
+       metadata.yaml (auto-check results are recorded in the notes), and rebuilds the catalog.</p>
+    <button class="pub" type="submit">Publish</button>
+  </form>
+
+  <form method="post" action="/review/reject" style="margin-top:8px">
+    <input type="hidden" name="key" value="{{ key }}">
+    <input type="hidden" name="saved_name" value="{{ it.saved_name }}">
+    <button class="rej" type="submit">Reject &amp; delete</button>
+  </form>
+</div>
+{% endfor %}
+</body>
+</html>

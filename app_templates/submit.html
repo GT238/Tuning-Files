@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit a file — Tuning Files Archive</title>
+<style>
+  body { font-family: "Segoe UI", system-ui, sans-serif; background:#14161a; color:#e8eaed;
+         max-width: 760px; margin: 0 auto; padding: 24px 16px 60px; }
+  h1 { font-size: 1.4rem; } a { color: #f5a623; }
+  .back { color:#9aa0a8; font-size:.85rem; }
+  label { display:block; margin: 12px 0 4px; font-size:.9rem; color:#9aa0a8; }
+  input[type=text], select, textarea { width:100%; box-sizing:border-box; padding:8px 10px;
+    background:#1d2026; color:#e8eaed; border:1px solid #2c313a; border-radius:6px; font-size:.95rem; }
+  textarea { min-height: 70px; }
+  .row { display:flex; gap:12px; } .row > div { flex:1; }
+  .req::after { content:" *"; color:#c94f4f; }
+  .err { background:#3a1d1d; border:1px solid #c94f4f; border-radius:6px; padding:10px 12px; }
+  .ok  { background:#1d3a24; border:1px solid #3fa46a; border-radius:6px; padding:10px 12px; }
+  .warn{ color:#f5a623; }
+  button { margin-top:18px; padding:10px 22px; font-size:1rem; border-radius:6px;
+    border:none; background:#f5a623; color:#14161a; font-weight:600; cursor:pointer; }
+  code { background:#1d2026; padding:1px 5px; border-radius:4px; font-size:.8rem; }
+  .fine { font-size:.8rem; color:#9aa0a8; }
+  ul.checks { font-size:.85rem; line-height:1.7; }
+</style>
+</head>
+<body>
+<p class="back"><a href="/">← tuning files archive catalog</a></p>
+
+{% if done %}
+<h2>Received — thank you!</h2>
+<p>File <strong>{{ item.original_name }}</strong> is in the review queue
+   (saved as <code>{{ item.saved_name }}</code>). It is <strong>not</strong> on the
+   public site yet — a maintainer verifies and publishes it.</p>
+<p>Automatic checks run on upload:</p>
+<ul class="checks">
+  <li>SHA-256: <code>{{ item.checks.sha256 }}</code></li>
+  <li>Size: {{ item.checks.size }} bytes</li>
+  {% if item.checks.duplicate_of %}
+    <li class="warn">⚠ Byte-identical to a file already in the archive:
+       <code>{{ item.checks.duplicate_of }}</code> — likely already available.</li>
+  {% else %}
+    <li>✓ Not a duplicate of anything in the archive.</li>
+  {% endif %}
+  {% if item.checks.os_id_in_bin is defined %}
+    <li>{{ '✓' if item.checks.os_id_in_bin else '⚠' }} Claimed OS ID
+       {{ 'is embedded' if item.checks.os_id_in_bin else 'was <strong>NOT</strong> found' }} in the bin.</li>
+  {% endif %}
+  {% if item.checks.cal_id_in_bin is defined %}
+    <li>{{ '✓' if item.checks.cal_id_in_bin else '⚠' }} Claimed CAL ID
+       {{ 'is embedded' if item.checks.cal_id_in_bin else 'was <strong>NOT</strong> found' }} in the bin.</li>
+  {% endif %}
+</ul>
+<p class="fine">Tip: if the OS ID was not found in the bin, the filename is probably
+   mislabeled — double-check in EFILive/TunerPro before the maintainer publishes it.</p>
+<p><a href="/submit">Submit another</a> · <a href="/">Back</a></p>
+
+{% else %}
+<h1>Submit a tuning file</h1>
+<p>Share a calibration (.bin), definition (.xdf) or tune. Submissions land in a
+   review queue — nothing is public until a maintainer publishes it. You confirm
+   you have the right to share the file and that it's for personal/educational use.</p>
+
+{% if error %}<p class="err">{{ error }}</p>{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+  <label class="req" for="file">File (.bin / .xdf / .cal / .xml, max 64 MB)</label>
+  <input type="file" id="file" name="file" required>
+
+  <div class="row">
+    <div>
+      <label class="req" for="type">Type</label>
+      <select id="type" name="type" required>
+        <option value="stock">stock / reference calibration</option>
+        <option value="tune">user tune</option>
+        <option value="xdf">XDF definition</option>
+        <option value="other">other</option>
+      </select>
+    </div>
+    <div>
+      <label class="req" for="manufacturer">Manufacturer</label>
+      <input type="text" id="manufacturer" name="manufacturer" placeholder="GM, Ford, …" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="ecu">ECU family</label>
+      <input type="text" id="ecu" name="ecu" placeholder="E38, E67, Car-LS, 512K-PCM, TCM…">
+    </div>
+    <div>
+      <label for="module">Module</label>
+      <select id="module" name="module">
+        <option value="">(select)</option>
+        <option>PCM</option><option>ECM</option><option>TCM</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="os_id">OS ID</label>
+      <input type="text" id="os_id" name="os_id" placeholder="e.g. 12592618">
+    </div>
+    <div>
+      <label for="cal_id">CAL ID</label>
+      <input type="text" id="cal_id" name="cal_id" placeholder="e.g. 15193885">
+    </div>
+  </div>
+
+  <label class="req" for="vehicle">Vehicle</label>
+  <input type="text" id="vehicle" name="vehicle" placeholder="e.g. Chevrolet Silverado 2500 4x4" required>
+
+  <div class="row">
+    <div>
+      <label for="engine">Engine</label>
+      <input type="text" id="engine" name="engine" placeholder="e.g. LQ4 6.0L">
+    </div>
+    <div>
+      <label for="years">Years</label>
+      <input type="text" id="years" name="years" placeholder="e.g. 2005">
+    </div>
+    <div>
+      <label for="transmission">Transmission</label>
+      <input type="text" id="transmission" name="transmission" placeholder="e.g. 4L80E">
+    </div>
+  </div>
+
+  <label for="description">Description</label>
+  <textarea id="description" name="description" placeholder="Anything useful: how it was pulled, what it's good for, known quirks…"></textarea>
+
+  <div class="row">
+    <div>
+      <label class="req" for="source">Source / provenance</label>
+      <input type="text" id="source" name="source" placeholder="own vehicle scan, forum user, archive.org…" required>
+    </div>
+    <div>
+      <label for="source_url">Source URL</label>
+      <input type="text" id="source_url" name="source_url" placeholder="https://…">
+    </div>
+  </div>
+
+  <label for="tags">Tags (comma separated)</label>
+  <input type="text" id="tags" name="tags" placeholder="lq4, 6.0, 4x4, efilive">
+
+  <label for="contact">Your handle / email (optional — goes into the file's notes)</label>
+  <input type="text" id="contact" name="contact" placeholder="forum name or email">
+
+  <label style="margin-top:16px">
+    <input type="checkbox" id="agreement" name="agreement" value="yes" required>
+    I have the right to share this file, and it is shared for personal / educational use only.
+  </label>
+
+  <button type="submit">Submit for review</button>
+  <p class="fine">Files are checked automatically on upload: checksum, duplicate
+     detection against the archive, and whether the claimed OS/CAL ID is actually
+     embedded in the bin. Mislabeled or duplicate submissions are flagged for the
+     maintainer.</p>
+</form>
+{% endif %}
+</body>
+</html>

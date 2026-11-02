@@ -150,7 +150,34 @@ The generator does **not** run the embedded-ID check on XDFs — they are defini
 
 **Phase 2 (implemented): submission drop zone.** `files/_inbox/` is a drop zone on the server. The catalog generator skips any folder starting with `_`, so dropped files are invisible until published. Submitters include a note (vehicle, engine, source); the maintainer verifies (checksum, duplicate check, embedded-ID check — all automatic), writes the metadata entry, moves the file into the tree, and rebuilds.
 
-**Phase 3 (when there's demand): web upload form.** A small form on the site (a Flask app alongside the static catalog) collecting the metadata fields + file, landing in `_inbox`, plus a review queue page for the maintainer. Required fields: vehicle, engine, years, source/provenance, and a "I have the right to share this / personal use only" checkbox. The takedown contact in the footer covers mistakes.
+**Phase 3 (implemented): web upload form.** A small Flask app (`app.py`) runs
+alongside the static catalog; nginx proxies `/submit` and `/review` to it (see
+`deploy/nginx-tuning-files.conf`).
+
+- `/submit` — public form: file + metadata fields + "I have the right to share
+  this / personal use only" checkbox. On submit, the file lands in
+  `files/_inbox/` (never published, blocked in nginx) together with a `.json`
+  sidecar holding the form data and the automatic checks: SHA-256, duplicate
+  detection against the published catalog, and embedded OS/CAL ID verification.
+- `/review?key=...` — maintainer queue (guarded by `REVIEW_KEY`): shows pending
+  submissions with their auto-check badges, and lets you **publish** (pick the
+  target folder + filename → file is moved, the entry is appended to
+  `metadata.yaml`, and the catalog rebuilds) or **reject** (deleted).
+
+Running on the server:
+
+```bash
+cd /srv/tuning-files
+python3 -m pip install -r requirements.txt
+# app.env:  REVIEW_KEY=<pick a secret>   (ARCHIVE_ROOT defaults to the app's directory)
+sudo cp deploy/tuning-files-upload.service /etc/systemd/system/
+sudo systemctl enable --now tuning-files-upload
+```
+
+The Flask app binds to 127.0.0.1:5000; only `/submit` and `/review` are exposed
+through nginx. `deploy/deploy.sh` syncs `app.py` + `app_templates/` too,
+restarts the service, and deliberately **excludes `files/_inbox/`** from rsync
+so pending submissions on the server are never wiped by a deploy.
 
 What's automatic vs human for every file:
 - **Automatic:** SHA-256, size, byte-identical duplicate detection, claimed OS/CAL ID vs bin content (catches mislabeled filenames), XDF↔bin ID matching.

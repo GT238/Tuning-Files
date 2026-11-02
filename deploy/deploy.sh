@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-# Build the catalog locally and push the served parts to the Hetzner server.
+# Build the catalog locally and push everything to the Hetzner server.
 #
 # Usage:
 #   SERVER=tuning@1.2.3.4 DEST=/srv/tuning-files bash deploy/deploy.sh
-# (or export SERVER/DEST beforehand; defaults below)
+#
+# NOTE: files/_inbox/ is deliberately EXCLUDED from the rsync -- pending
+# submissions living on the server must never be wiped by a deploy.
 set -euo pipefail
 
 SERVER="${SERVER:-user@YOUR.HETZNER.IP}"
@@ -13,7 +15,16 @@ echo "== Building catalog =="
 python build_catalog.py
 
 echo "== Syncing to ${SERVER}:${DEST} =="
-rsync -av --delete ./catalog/ "${SERVER}:${DEST}/catalog/"
-rsync -av --delete ./files/   "${SERVER}:${DEST}/files/"
+rsync -av --delete ./catalog/       "${SERVER}:${DEST}/catalog/"
+rsync -av --delete ./app_templates/ "${SERVER}:${DEST}/app_templates/"
+rsync -av ./app.py                  "${SERVER}:${DEST}/app.py"
+rsync -av --delete --exclude '_inbox/' ./files/ "${SERVER}:${DEST}/files/"
 
-echo "Done. Site is live at http://${SERVER#*@}/ (or your server hostname)."
+echo "== Restarting submission server =="
+if ssh "$SERVER" "sudo systemctl restart tuning-files-upload"; then
+  echo "service restarted"
+else
+  echo "NOTE: could not restart tuning-files-upload - do it manually on the server."
+fi
+
+echo "Done. Site: http://<server-ip>/   Submit: /submit   Review: /review"
