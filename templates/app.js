@@ -1,6 +1,6 @@
 "use strict";
 
-const state = { files: [], byPath: {}, q: "", maker: "all", type: "all", sort: "path", needsOnly: false, filesUrl: "/files/" };
+const state = { files: [], byPath: {}, usedBy: {}, q: "", maker: "all", type: "all", sort: "path", needsOnly: false, filesUrl: "/files/" };
 
 const el = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({
@@ -25,7 +25,7 @@ function badge(t) {
 
 function haystack(f) {
   return [f.name, f.path, f.manufacturer, f.ecu, f.module, f.os_id, f.cal_id,
-          f.vehicle, f.engine, f.years, f.transmission, f.description,
+          f.vehicle, f.engine, f.years, f.transmission, f.description, f.notes,
           (f.tags || []).join(" ")].join(" ").toLowerCase();
 }
 
@@ -60,6 +60,14 @@ function idCell(f) {
   return html;
 }
 
+function usedByCell(f) {
+  const list = state.usedBy[f.path] || [];
+  if (!list.length) return "";
+  const shown = list.slice(0, 3).map(u => `<a href="${esc(u.download_url)}">${esc(u.name)}</a>`).join(", ");
+  const more = list.length > 3 ? ` <span class="sub">+${list.length - 3} more</span>` : "";
+  return `<div class="sub">used by: ${shown}${more}</div>`;
+}
+
 function rowHtml(f) {
   const vehicle = [f.vehicle, f.engine, f.years].filter(Boolean);
   const canon = f.duplicate_of ? state.byPath[f.duplicate_of] : null;
@@ -83,6 +91,7 @@ function rowHtml(f) {
       ${f.xdf ? ` <a class="xdf-link" href="${esc(xdfUrl(f))}" title="Compatible XDF definition">⧉ XDF</a>` : ""}
       ${f.source ? `<div class="sub">source: ${esc(f.source)}</div>` : ""}
       ${dup}
+      ${f.type === "xdf" ? usedByCell(f) : ""}
       ${f.notes ? `<div class="sub">${esc(f.notes)}</div>` : ""}
     </td>
   </tr>`;
@@ -140,6 +149,10 @@ fetch("index.json")
     state.files = data.files || [];
     state.filesUrl = data.files_url || "/files/";
     state.byPath = Object.fromEntries(state.files.map(f => [f.path, f]));
+    state.usedBy = {};
+    for (const f of state.files) {
+      if (f.xdf) (state.usedBy[f.xdf] = state.usedBy[f.xdf] || []).push(f);
+    }
     el("generated").textContent = "Catalog generated " + (data.generated || "");
     populateFilters(state.files);
     wire();

@@ -157,6 +157,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12587603"
+    xdf: "GM/E38/12587603/xdf/Operating System 12587603 - 1Mb PCM - 2004 model year.xdf"
     vehicle: "GMC Sierra 1500 4x4"
     engine: "LM7 5.3L"
     years: "2004"
@@ -188,6 +189,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Chevrolet Silverado 1500 4x4"
     years: "2005"
     description: "Stock PCM calibration, 2005 Silverado 1500 4x4"
@@ -201,6 +203,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Chevrolet van (MPV) 4x4 - VERIFY"
     engine: "LM7 5.3L"
     years: "2005"
@@ -215,6 +218,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Chevrolet Express 1500 4x2 (MPV)"
     engine: "LR4 4.8L"
     years: "2005"
@@ -228,6 +232,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "GMC Savana 2500 4x2 (MPV)"
     engine: "LQ4 6.0L"
     years: "2005"
@@ -241,6 +246,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Chevrolet Silverado 1500 4x4"
     engine: "LR4 4.8L"
     years: "2005"
@@ -254,6 +260,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Chevrolet Silverado 1500 4x2"
     engine: "LM7 5.3L"
     years: "2005"
@@ -267,6 +274,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Chevrolet Silverado 1500 4x4 - per filename"
     engine: "6.0L V8"
     years: "2005"
@@ -281,6 +289,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Chevrolet Silverado 1500 4x4"
     engine: "L59 5.3L flex-fuel"
     years: "2005"
@@ -295,6 +304,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Chevrolet Silverado 3500 (1-ton)"
     engine: "LQ4 6.0L"
     years: "2005"
@@ -322,6 +332,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Cadillac Escalade 4x4"
     engine: "LQ4 6.0L"
     years: "2005"
@@ -336,6 +347,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Cadillac Escalade 4x4"
     engine: "LQ4 6.0L"
     years: "2005"
@@ -350,6 +362,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Hummer H2"
     engine: "LQ4 6.0L"
     years: "2005"
@@ -402,6 +415,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "Chevrolet Express 2500"
     engine: "6.0L V8 (per OS family)"
     years: "2005"
@@ -416,6 +430,7 @@ files:
     ecu: E38
     module: PCM
     os_id: "12592618"
+    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
     vehicle: "GM truck (application unknown)"
     engine: "5.3L V8 (LM7/LM4)"
     years: "2005"
@@ -538,3 +553,174 @@ files:
     source: "owner's collection"
     tags: [gto, ls1, mislabeled]
     notes: "BYTE-IDENTICAL to '04 GTO M6 os12587604.bin - the '2005/72977' label is wrong (2005 GTO = LS2, a different engine). This is a mislabeled copy of the 2004 GTO calibration. The '04 file is canonical; this one can be deleted."
+
+
+  # ============================== XDF definitions (from "Bin Definitions" folder) =========
+  - path: "GM/E38/12587603/xdf/12587603 - 2004 1mb.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: E38
+    os_id: "12587603"
+    description: "TunerPro/XFI definition for OS 12587603 (1Mb PCM, 2004) - compact revision"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, e38, 1mb, 2004]
+    notes: "One of four definitions for OS 12587603 in this batch (823KB) - the other three are 'Release', 'Latest Release' and the 'Operating System ...' series file."
+
+  - path: "GM/E38/12587603/xdf/12587603 - Release.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: E38
+    os_id: "12587603"
+    description: "TunerPro/XFI definition for OS 12587603 (1Mb PCM, 2004) - release revision"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, e38, 1mb, 2004]
+    notes: "Mid-size revision (1.8MB) of the 12587603 definition; see the other three 12587603 files for alternatives."
+
+  - path: "GM/E38/12587603/xdf/12587603 -Latest Release.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: E38
+    os_id: "12587603"
+    description: "TunerPro/XFI definition for OS 12587603 (1Mb PCM, 2004) - latest release revision"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, e38, 1mb, 2004]
+    notes: "Largest revision (2MB) of the 12587603 definition - likely the most complete; compare coverage in TunerPro before relying on it."
+
+  - path: "GM/E38/12587603/xdf/Operating System 12587603 - 1Mb PCM - 2004 model year.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: E38
+    os_id: "12587603"
+    description: "TunerPro/XFI definition for OS 12587603 (1Mb PCM, 2004 model year)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, e38, 1mb, 2004]
+    notes: "Canonical 'Operating System' series naming. This is the definition linked from the 2004 Sierra LM7 bin in this archive."
+
+  - path: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: E38
+    os_id: "12592618"
+    description: "TunerPro/XFI definition for OS 12592618 (1Mb PCM, 2005)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, e38, 1mb, 2005]
+    notes: "Unusually compact (44KB) for a full E38 definition - 'VR1' is likely a revision tag. Verify table coverage in TunerPro. Linked from all 2005 E38/12592618 bins in this archive."
+
+  - path: "GM/512K-PCM/12202088/xdf/Operating System 12202088 - 512Kb PCM - 2001 model year.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "12202088"
+    description: "TunerPro/XFI definition for OS 12202088 (512Kb PCM, 2001)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, 2001]
+    notes: "512Kb PCM generation (2001-2002 trucks). No bins for this OS in the archive yet - definition is ready for when they arrive."
+
+  - path: "GM/512K-PCM/12208322/xdf/Operating System 12208322 - 512Kb PCM - 2001 model year.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "12208322"
+    description: "TunerPro/XFI definition for OS 12208322 (512Kb PCM, 2001)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, 2001]
+    notes: "512Kb PCM generation. No bins for this OS in the archive yet."
+
+  - path: "GM/512K-PCM/12209203/xdf/Operating System 12209203 - 512Kb PCM - 2002 model year.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "12209203"
+    description: "TunerPro/XFI definition for OS 12209203 (512Kb PCM, 2002)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, 2002]
+    notes: "512Kb PCM generation. No bins for this OS in the archive yet."
+
+  - path: "GM/512K-PCM/12212156/xdf/Operating System 12212156 - 512Kb PCM - 2002 model year.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "12212156"
+    description: "TunerPro/XFI definition for OS 12212156 (512Kb PCM, 2002)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, 2002]
+    notes: "Standard definition for OS 12212156; a separate V6-variant definition (OS12212156 - v6) is also in the archive. The Lean Cruise patch also covers this OS."
+
+  - path: "GM/512K-PCM/12212156/xdf/OS12212156 - 2002 512kB PCM - v6.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "12212156"
+    description: "TunerPro/XFI definition for OS 12212156 (512Kb PCM, 2002) - V6 variant"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, 2002, v6]
+    notes: "V6-specific variant for the same OS as the standard 12212156 definition - different memory map/tables, both kept."
+
+  - path: "GM/512K-PCM/12216125/xdf/Operating System 12216125 - 512Kb PCM - 2002 model year - 5.3L Flex Fuel and 8.1L engines.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "12216125"
+    description: "TunerPro/XFI definition for OS 12216125 (512Kb PCM, 2002) - 5.3L flex-fuel and 8.1L"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, 2002, flex-fuel, 8.1]
+    notes: "Covers 5.3L flex-fuel and 8.1L applications. No bins for this OS in the archive yet."
+
+  - path: "GM/512K-PCM/12221588/xdf/Operating System 12221588 - 512Kb PCM - Corvette 2001 to 2003 model years.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "12221588"
+    description: "TunerPro/XFI definition for OS 12221588 (512Kb PCM, Corvette 2001-2003)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, corvette, 2001, 2002, 2003]
+    notes: "Corvette C5 application. Same file size as the 12593358 Corvette definition but different content (different OS). No bins yet."
+
+  - path: "GM/512K-PCM/12225074/xdf/Operating System 12225074 - 512Kb PCM - 2001 to 2004 Holden model years.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "12225074"
+    description: "TunerPro/XFI definition for OS 12225074 (512Kb PCM, Holden 2001-2004)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, holden]
+    notes: "Holden (Australia) applications 2001-2004. The COS 3 definition is based on this OS. No bins yet."
+
+  - path: "GM/512K-PCM/1250001/xdf/COS 1 - 1250001 - 512Kb PCM - based on 12202088 - 2001 model year.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "1250001"
+    description: "COS 1 combined definition for 512Kb PCM (2001), based on OS 12202088"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, 2001, cos]
+    notes: "'COS' = community combined/modified operating system definition, based on OS 12202088. Verify differences vs the base definition before tuning."
+
+  - path: "GM/512K-PCM/1290003/xdf/COS 3 - 1290003 - 512Kb PCM - based on 12225074 - 2001 to 2004 Holden model years.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "1290003"
+    description: "COS 3 combined definition for 512Kb PCM, based on OS 12225074 (Holden 2001-2004)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, holden, cos]
+    notes: "'COS' = community combined/modified operating system definition, based on OS 12225074 (Holden). Verify differences vs the base definition."
+
+  - path: "GM/512K-PCM/12593358/xdf/Operating System 12593358 - 512Kb PCM - Corvette 2001 to 2003 model years.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: 512K-PCM
+    os_id: "12593358"
+    description: "TunerPro/XFI definition for OS 12593358 (512Kb PCM, Corvette 2001-2003)"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, 512k, corvette, 2001, 2002, 2003]
+    notes: "Corvette C5 application, later OS than 12221588. No bins yet."
+
+  - path: "GM/Various/misc/xdf/Lean Cruise.xdf"
+    type: xdf
+    manufacturer: GM
+    ecu: Various
+    description: "Lean cruise patch definition covering OS 12212156, 12587603 and 12587604"
+    source: "Bin Definitions folder (community definitions)"
+    tags: [xdf, patch, lean-cruise]
+    notes: "Small patch definition (~2KB) - lean cruise tables only, not a full definition. Covers OS 12212156, 12587603 and 12587604; use alongside the full definition for the OS you are tuning."

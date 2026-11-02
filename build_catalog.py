@@ -66,8 +66,8 @@ def scan_files(files_dir):
         if not p.is_file():
             continue
         rel = p.relative_to(files_dir).as_posix()
-        if any(part.startswith(".") for part in rel.split("/")):
-            continue  # skip .gitkeep etc.
+        if any(part.startswith(".") or part.startswith("_") for part in rel.split("/")):
+            continue  # skip .gitkeep, _inbox/ (submission drop zone) etc.
         found[norm(rel)] = p
     return found
 
@@ -95,10 +95,11 @@ def build_entries(found, metadata, files_url):
                 e[k] = meta[k]
         if e.get("type") and e["type"] not in VALID_TYPES:
             print(f"  WARNING: unknown type '{e['type']}' on {rel}")
-        # verify claimed IDs against bin content
+        # verify claimed IDs against bin content (calibration images only --
+        # XDFs are XML definitions; their OS attribution comes from the filename)
         for idk in ("os_id", "cal_id"):
             claimed = e.get(idk)
-            if claimed:
+            if claimed and e.get("type") not in ("xdf", "doc", "tool"):
                 embedded = str(claimed).encode() in data
                 e[idk + "_in_bin"] = embedded
                 if not embedded:

@@ -138,6 +138,25 @@ cd files && sha256sum -c ../catalog/sha256sums.txt
 On Windows: `certutil -hashfile somefile.bin SHA256` and compare with the
 checksum shown on the site (click "copy" next to any row).
 
+## XDF definitions
+
+Definitions live alongside the bins they apply to (`files/<...>/xdf/`) and appear in the **same catalog** with an XDF badge — one search results page, not a separate section. Bins link to their definition (⧉ XDF chip); definition rows show "used by" links back to the bins they apply to. Search an OS ID (e.g. `12592618`) to see the calibrations and their definition together.
+
+The generator does **not** run the embedded-ID check on XDFs — they are definitions, not calibration images, so their OS attribution comes from the filename.
+
+## Submissions & uploads
+
+**Phase 1 (now): maintainer-curated.** You collect files, write metadata, rebuild. This is what keeps the archive trustworthy.
+
+**Phase 2 (implemented): submission drop zone.** `files/_inbox/` is a drop zone on the server. The catalog generator skips any folder starting with `_`, so dropped files are invisible until published. Submitters include a note (vehicle, engine, source); the maintainer verifies (checksum, duplicate check, embedded-ID check — all automatic), writes the metadata entry, moves the file into the tree, and rebuilds.
+
+**Phase 3 (when there's demand): web upload form.** A small form on the site (a Flask app alongside the static catalog) collecting the metadata fields + file, landing in `_inbox`, plus a review queue page for the maintainer. Required fields: vehicle, engine, years, source/provenance, and a "I have the right to share this / personal use only" checkbox. The takedown contact in the footer covers mistakes.
+
+What's automatic vs human for every file:
+- **Automatic:** SHA-256, size, byte-identical duplicate detection, claimed OS/CAL ID vs bin content (catches mislabeled filenames), XDF↔bin ID matching.
+- **From submitter:** vehicle, engine, years, transmission, description, source.
+- **From maintainer review:** ECU family attribution, `verified` flag, notes.
+
 ## Notes / roadmap ideas
 
 - Git handles this scale fine; if the archive grows to tens of GB, move
