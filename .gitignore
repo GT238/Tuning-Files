@@ -1,6 +1,5 @@
 # generated site -- always rebuild from files/ + metadata.yaml
-catalog/
-
+# (committed to git so GitHub Pages can serve it)
 # python cruft
 __pycache__/
 *.pyc

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuning Files Archive — ECU/PCM calibration &amp; XDF library</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Tuning Files Archive</h1>
+  <p class="tagline">A searchable library of ECU/PCM calibration files (.bin), XDF definitions, and tunes.</p>
+  <p class="submit-line">Have a calibration or definition to share?
+    <a class="submit-btn" id="submit-header" href="/submit">⤴ Submit a file</a>
+    — submissions are auto-checked (checksum, duplicates, OS ID) and published by a maintainer after review.</p>
+</header>
+
+<main>
+  <section id="controls">
+    <input id="search" type="search"
+           placeholder="Search file name, vehicle, engine, OS ID, cal ID, tag…"
+           autocomplete="off" autofocus>
+    <div class="filters">
+      <select id="f-maker"><option value="all">All manufacturers</option></select>
+      <select id="f-type"><option value="all">All types</option></select>
+      <select id="sort">
+        <option value="path">Sort: manufacturer / ECU / name</option>
+        <option value="size-desc">Sort: largest first</option>
+        <option value="size-asc">Sort: smallest first</option>
+        <option value="newest">Sort: newest first</option>
+      </select>
+      <label class="needs"><input type="checkbox" id="f-needs"> only files needing metadata</label>
+    </div>
+  </section>
+
+  <p id="count"></p>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>File</th><th>Vehicle</th><th>ECU</th>
+          <th>OS / Cal ID</th><th class="num">Size</th>
+          <th>SHA-256</th><th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p id="empty" hidden></p>
+  </div>
+</main>
+
+<footer>
+  <p>Always verify a download against its SHA-256 checksum before flashing.
+     Checksums for every file are listed in <code>sha256sums.txt</code> at the archive root.</p>
+  <p>Badges: <span class="badge t-stock">stock</span>/<span class="badge t-tune">tune</span>/<span class="badge t-xdf">xdf</span>
+     file type &nbsp;•&nbsp; <span class="badge t-missing">needs info</span> metadata incomplete
+     &nbsp;•&nbsp; <span class="badge t-missing">ID?</span> claimed OS ID not found inside the bin — verify before use
+     &nbsp;•&nbsp; <span class="badge t-stock">verified</span> checksum confirmed against a known-good copy
+     &nbsp;•&nbsp; ⧉ <em>duplicate of</em> = byte-identical to another archived file (keep one, delete the rest if you like).</p>
+  <p>Have a calibration or definition to share? <a id="submit-footer" href="/submit">Submit it for review</a>
+     — submissions get automatic checks (checksum, duplicates, embedded OS/CAL ID)
+     before a maintainer publishes them.</p>
+  <p class="legal">Calibration files are the property of their respective manufacturers and are shared
+     here for personal / educational use only. If you own a copyright to any file here and want it
+     removed, <a href="mailto:admin@example.com">contact the site admin</a>.</p>
+  <p id="generated"></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

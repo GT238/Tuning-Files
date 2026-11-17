@@ -139,6 +139,10 @@ def main():
     ap.add_argument("--templates", default="templates")
     ap.add_argument("--out", default="catalog")
     ap.add_argument("--files-url", default="/files/")
+    ap.add_argument("--base-url", default="",
+                    help="site base path when served from a subdirectory (e.g. GitHub Pages /Tuning-Files)")
+    ap.add_argument("--submit-url", default="/submit",
+                    help="where the Submit button points (e.g. GitHub issues when no Flask app is deployed)")
     a = ap.parse_args()
 
     root = Path(a.root)
@@ -151,7 +155,9 @@ def main():
 
     metadata = load_metadata(meta_path)
     found = scan_files(files_dir)
-    entries, missing, dangling, id_mismatch = build_entries(found, metadata, a.files_url)
+    base = a.base_url.rstrip("/")
+    files_url_full = base + a.files_url
+    entries, missing, dangling, id_mismatch = build_entries(found, metadata, files_url_full)
     dup_groups = find_duplicates(entries)
     orphans = sorted(set(metadata) - set(found))
 
@@ -160,7 +166,8 @@ def main():
     index = {
         "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "count": len(entries),
-        "files_url": a.files_url,
+        "files_url": files_url_full,
+        "submit_url": a.submit_url,
         "files": entries,
     }
     (out_dir / "index.json").write_text(

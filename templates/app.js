@@ -161,6 +161,12 @@ fetch("index.json")
   .then(data => {
     state.files = data.files || [];
     state.filesUrl = data.files_url || "/files/";
+    if (data.submit_url) {
+      const h = document.getElementById("submit-header");
+      const f = document.getElementById("submit-footer");
+      if (h) h.href = data.submit_url;
+      if (f) f.href = data.submit_url;
+    }
     state.byPath = Object.fromEntries(state.files.map(f => [f.path, f]));
     state.usedBy = {};
     for (const f of state.files) {
