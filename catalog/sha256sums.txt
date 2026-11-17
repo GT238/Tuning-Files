@@ -50,6 +50,5 @@ d525af93610c42fdf6777c7de5ff0f8b84b79b2c1ab1026faa67201a7814137e  GM/P59/1263962
 d0aeffbfadd4519c8bdf3816c5ac7eb85c47bdda3187de72cf737114bb164932  GM/P59/tools/GM-P01-P59-checksum-plugin.dll
 95b683dfa0d78061175f97126823a927c426a06d5a77963a04c826d56095514d  GM/TCM/n-a/stock/05TRAILBLAZER 5.3 TCM.bin
 883bef3e6b16afced847f99f4bc13f998439fa2276b0ea83c45d9dcf80e020cf  GM/Unverified/12595726/stock/2005 TrailblazerI6Auto.bin
-94fd31af4dec846c08d4b41d72b9fa389492a2f2810a12f2dbba48e5dd84b2a0  GM/Unverified/unknown/stock/05 Escalade 4x4 6.0L os12592618.bin
 bf206e8d301c29665cd4da695544ad6360870ab621f617369354f2280e8e187e  GM/Unverified/unknown/stock/05 TRAILBLAZER 5.3.bin
 1aad0dc11fa500256fa03c6afb8184b4fa31a88c4cd546d1dbc43f8595de8c5a  GM/Various/misc/xdf/Lean Cruise.xdf

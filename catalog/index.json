@@ -1,6 +1,6 @@
 {
- "generated": "2026-11-17T16:57:03+00:00",
- "count": 55,
+ "generated": "2026-11-17T19:23:06+00:00",
+ "count": 54,
  "files_url": "/Tuning-Files/files/",
  "submit_url": "https://github.com/GT238/Tuning-Files/issues",
  "files": [
@@ -1412,31 +1412,6 @@
    ],
    "notes": "OS 12595726 embedded, but file size is nonstandard (525,854 bytes vs expected 512KB/1MB) - possibly a wrapped or partial image. Verify integrity before use.",
    "os_id_in_bin": true
-  },
-  {
-   "path": "GM/Unverified/unknown/stock/05 Escalade 4x4 6.0L os12592618.bin",
-   "name": "05 Escalade 4x4 6.0L os12592618.bin",
-   "size": 524288,
-   "sha256": "94fd31af4dec846c08d4b41d72b9fa389492a2f2810a12f2dbba48e5dd84b2a0",
-   "modified": "2020-11-26T00:34:01+00:00",
-   "download_url": "/Tuning-Files/files/GM/Unverified/unknown/stock/05%20Escalade%204x4%206.0L%20os12592618.bin",
-   "needs_metadata": false,
-   "type": "stock",
-   "manufacturer": "GM",
-   "ecu": "Unverified",
-   "module": "PCM",
-   "vehicle": "Cadillac Escalade 4x4 - per filename",
-   "engine": "6.0L V8",
-   "years": "2005",
-   "description": "Suspect file: 512KB, no embedded IDs",
-   "source": "downloaded from gearhead-efi.com (owner's collection)",
-   "source_url": "https://www.gearhead-efi.com",
-   "tags": [
-    "escalade",
-    "suspect",
-    "odd-size"
-   ],
-   "notes": "Only 512KB (E38 truck PCMs are 1MB) and NO OS ID embedded anywhere in the file - cannot confirm the 12592618 claim. Possibly truncated, corrupt, or a different module entirely. Do not flash; verify first."
   },
   {
    "path": "GM/Unverified/unknown/stock/05 TRAILBLAZER 5.3.bin",
