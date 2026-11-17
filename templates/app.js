@@ -56,7 +56,10 @@ function refUrl(refPath) {
 
 function chips(f) {
   let html = "";
-  if (f.xdf) html += ` <a class="xdf-link" href="${esc(refUrl(f.xdf))}" title="Compatible XDF definition">⧉ XDF</a>`;
+  if (f.xdf) {
+    const auto = f.xdf_suggested ? " (auto-linked by matching OS ID)" : "";
+    html += ` <a class="xdf-link" href="${esc(refUrl(f.xdf))}" title="Compatible XDF definition${auto}">⧉ XDF</a>`;
+  }
   for (const t of (f.tools || [])) {
     const auto = f.tools_suggested ? " (auto-suggested for this file family)" : "";
     html += ` <a class="xdf-link" href="${esc(refUrl(t))}" title="Related tool: ${esc(t.split("/").pop())}${auto}">⛭ tool</a>`;

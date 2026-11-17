@@ -74,7 +74,7 @@ is worse than an obvious "we don't know yet".
 | `source` / `source_url` | recommended | provenance -- where the file came from |
 | `author` | optional | who made the file (XDF author, tuner) -- credit where due |
 | `aliases` | optional | list of alternative names the file is known by (e.g. former duplicate filenames) -- searchable, shown as "aka" |
-| `xdf` | optional | path of a compatible XDF (linked from the site) |
+| `xdf` | optional | path of a compatible XDF (linked from the site). When exactly one archived XDF exists for the bin's OS ID, the generator auto-links it; multiple candidates are reported for a manual pick |
 | `tools` | optional | list of paths of related tools (checksum plugins etc.), linked from the site. For Car-LS/P59 bins without one, the generator auto-suggests the P01/P59 checksum plugin |
 | `tags` | optional | free-form keywords |
 | `verified` | optional | `true` if checksum confirmed against known-good copy |

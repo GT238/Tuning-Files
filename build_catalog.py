@@ -78,6 +78,14 @@ def scan_files(files_dir):
 
 def build_entries(found, metadata, files_url):
     entries, missing, dangling, id_mismatch = [], [], [], []
+    multi_xdf = []
+    # index archived XDFs by the OS segment of their path (ecu/<osid>/xdf/...)
+    xdf_by_os = {}
+    for rel, meta in metadata.items():
+        if meta.get("type") == "xdf":
+            parts = rel.split("/")
+            if len(parts) >= 3 and parts[2] not in ("xdf", "tools"):
+                xdf_by_os.setdefault(parts[2], []).append(rel)
     for rel, path in sorted(found.items()):
         meta = metadata.get(rel, {})
         st = path.stat()
@@ -104,6 +112,16 @@ def build_entries(found, metadata, files_url):
                 and e.get("ecu") in AUTO_TOOL_ECUS and PLUGIN_PATH in found):
             e["tools"] = [PLUGIN_PATH]
             e["tools_suggested"] = True
+        # auto-suggest a linked XDF when exactly one archived definition exists
+        # for the bin's OS ID (an XDF defines the OS, not the vehicle).
+        if (not e.get("xdf") and e.get("type") in ("stock", "tune") and e.get("os_id")):
+            cands = [r for r in xdf_by_os.get(e["os_id"], [])
+                     if metadata.get(r, {}).get("manufacturer", e.get("manufacturer")) == e.get("manufacturer")]
+            if len(cands) == 1:
+                e["xdf"] = cands[0]
+                e["xdf_suggested"] = True
+            elif len(cands) > 1:
+                multi_xdf.append((rel, cands))
         if e.get("type") and e["type"] not in VALID_TYPES:
             print(f"  WARNING: unknown type '{e['type']}' on {rel}")
         # verify claimed IDs against bin content (calibration images only --
@@ -123,7 +141,7 @@ def build_entries(found, metadata, files_url):
         entries.append(e)
         if not meta:
             missing.append(rel)
-    return entries, missing, dangling, id_mismatch
+    return entries, missing, dangling, id_mismatch, multi_xdf
 
 
 def find_duplicates(entries):
@@ -168,7 +186,7 @@ def main():
     found = scan_files(files_dir)
     base = a.base_url.rstrip("/")
     files_url_full = base + a.files_url
-    entries, missing, dangling, id_mismatch = build_entries(found, metadata, files_url_full)
+    entries, missing, dangling, id_mismatch, multi_xdf = build_entries(found, metadata, files_url_full)
     dup_groups = find_duplicates(entries)
     orphans = sorted(set(metadata) - set(found))
 
@@ -223,7 +241,11 @@ def main():
         print("\nDangling XDF/tools references (target not in archive):")
         for src_, tgt in dangling:
             print(f"  - {src_} -> {tgt}")
-    if entries and not missing and not orphans and not dangling and not id_mismatch:
+    if multi_xdf:
+        print(f"\nBins with MULTIPLE candidate XDFs for their OS (no auto-link - pick manually):")
+        for rel, cands in multi_xdf:
+            print(f"  - {rel}: {', '.join(cands)}")
+    if entries and not missing and not orphans and not dangling and not id_mismatch and not multi_xdf:
         print("All metadata checks passed.")
 
 

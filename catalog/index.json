@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-17T16:42:34+00:00",
+ "generated": "2026-11-17T16:54:40+00:00",
  "count": 55,
  "files_url": "/Tuning-Files/files/",
  "submit_url": "https://github.com/GT238/Tuning-Files/issues",
@@ -412,6 +412,8 @@
     "m6"
    ],
    "notes": "OS 12592618 embedded - the same OS used by the 2005 truck calibrations in this archive (GM shared OS numbers across platforms). Verify application via CAL ID before flashing.",
+   "xdf": "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf",
+   "xdf_suggested": true,
    "os_id_in_bin": true
   },
   {
