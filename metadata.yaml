@@ -784,7 +784,7 @@ files:
     source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
     source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, corvette, 2001, 2002, 2003]
-    notes: "CAUTION: legacy BINARY-format definition (not the modern XML XDF) - verify TunerPro loads it before relying on it. Near-twin of the 12221588 definition: same size, differs in only 142 of 623,503 bytes, likely a small revision of the same work. No OS IDs embedded, so the filename is the only evidence this defines OS 12593358. No bins for this OS yet."
+    notes: "Legacy BINARY-format definition (not the modern XML XDF) but VERIFIED to load in TunerPro - full parameter tree renders, user-tested 2026-11-17 against the same test bin as the 12221588 twin (both load clean, identical category tree). Near-twin confirmed: same size, differs in only 142 of 623,503 bytes, clustered as one 128-byte header-region block (likely title/description record) plus four 2-5-byte field changes - consistent with a revised version of the same definition. No OS IDs embedded, so the filename is the only evidence this defines OS 12593358. No bins for this OS yet."
 
   - path: "GM/Various/misc/xdf/Lean Cruise.xdf"
     type: xdf
