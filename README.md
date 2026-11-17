@@ -63,7 +63,7 @@ is worse than an obvious "we don't know yet".
 | field | required | notes |
 |---|---|---|
 | `path` | yes | location under `files/`, forward slashes |
-| `type` | yes | `stock` \| `tune` \| `xdf` \| `tool` \| `doc` \| `other` |
+| `type` | yes | `stock` \| `tune` (the two bin kinds) \| `xdf` \| `tool` \| `doc` \| `other` |
 | `manufacturer` | yes | `GM`, `Ford`, `Chrysler`, ... |
 | `ecu` | yes | ECU family, e.g. `E38`, `E67`, `Car-LS`, `EEC-V`, `ME7.6` |
 | `module` | recommended | `PCM` \| `ECM` \| `TCM` -- which module the file belongs to |

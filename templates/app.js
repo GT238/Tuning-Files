@@ -16,7 +16,7 @@ function humanSize(b) {
   return (v >= 100 ? Math.round(v) : v.toFixed(1)) + " " + units[i];
 }
 
-const TYPE_LABELS = { stock: "Stock", tune: "Tune", xdf: "XDF", tool: "Tool", doc: "Doc", other: "Other" };
+const TYPE_LABELS = { stock: "Stock bin", tune: "Tuned bin", xdf: "XDF", tool: "Tool", doc: "Doc", other: "Other" };
 function badge(t) {
   const label = TYPE_LABELS[t] || (t || "file");
   const cls = TYPE_LABELS[t] ? "t-" + t : "t-other";
@@ -31,9 +31,14 @@ function haystack(f) {
 
 function filtered() {
   const tokens = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+  const typeMatch = f => {
+    if (state.type === "all") return true;
+    if (state.type === "bins") return f.type === "stock" || f.type === "tune";
+    return f.type === state.type;
+  };
   const out = state.files.filter(f => {
     if (state.maker !== "all" && f.manufacturer !== state.maker) return false;
-    if (state.type !== "all" && f.type !== state.type) return false;
+    if (!typeMatch(f)) return false;
     if (state.needsOnly && !f.needs_metadata) return false;
     if (tokens.length && !tokens.every(t => haystack(f).includes(t))) return false;
     return true;
@@ -142,7 +147,9 @@ function populateFilters(files) {
   const known = ["stock", "tune", "xdf", "tool", "doc", "other"];
   const types = [...known.filter(t => present.has(t)),
                  ...[...present].filter(t => !known.includes(t)).sort()];
+  const binCount = files.filter(f => f.type === "stock" || f.type === "tune").length;
   el("f-type").innerHTML = '<option value="all">All types</option>' +
+    (binCount ? `<option value="bins">Bins (stock + tuned) — ${binCount}</option>` : "") +
     types.map(t => `<option value="${esc(t)}">${esc(TYPE_LABELS[t] || t)}</option>`).join("");
 }
 
