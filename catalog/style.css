@@ -72,6 +72,8 @@ a { color: var(--accent); }
 .t-stock { background: var(--stock); }
 .t-tune  { background: var(--tune); }
 .t-xdf   { background: var(--xdf); }
+.xdf-link { white-space: nowrap; }
+.xdf-link.muted { color: var(--muted); border: 1px dashed var(--line); border-radius: 8px; padding: 0 6px; cursor: help; }
 .t-tool, .t-doc, .t-other { background: var(--tool); }
 .t-missing { background: var(--missing); margin-left: 4px; }
 

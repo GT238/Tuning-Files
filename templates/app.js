@@ -59,6 +59,8 @@ function chips(f) {
   if (f.xdf) {
     const auto = f.xdf_suggested ? " (auto-linked by matching OS ID)" : "";
     html += ` <a class="xdf-link" href="${esc(refUrl(f.xdf))}" title="Compatible XDF definition${auto}">⧉ XDF</a>`;
+  } else if (Array.isArray(f.xdf_candidates) && f.xdf_candidates.length) {
+    html += ` <span class="xdf-link muted" title="Multiple XDF definitions exist for this OS ID - review in the repo and pick: ${esc(f.xdf_candidates.join(" | "))}">⧉ ${f.xdf_candidates.length} XDFs?</span>`;
   }
   for (const t of (f.tools || [])) {
     const auto = f.tools_suggested ? " (auto-suggested for this file family)" : "";

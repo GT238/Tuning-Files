@@ -121,6 +121,7 @@ def build_entries(found, metadata, files_url):
                 e["xdf"] = cands[0]
                 e["xdf_suggested"] = True
             elif len(cands) > 1:
+                e["xdf_candidates"] = cands
                 multi_xdf.append((rel, cands))
         if e.get("type") and e["type"] not in VALID_TYPES:
             print(f"  WARNING: unknown type '{e['type']}' on {rel}")
