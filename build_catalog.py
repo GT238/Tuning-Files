@@ -37,6 +37,10 @@ META_FIELDS = [
 
 VALID_TYPES = {"stock", "tune", "xdf", "tool", "doc", "other"}
 
+# checksum plugin auto-suggest: applies to the P01/P59 bin family only
+PLUGIN_PATH = "GM/P59/tools/GM-P01-P59-checksum-plugin.dll"
+AUTO_TOOL_ECUS = {"Car-LS", "P59"}
+
 
 def norm(p):
     return p.replace("\\", "/").strip().strip("/")
@@ -93,6 +97,13 @@ def build_entries(found, metadata, files_url):
         for k in META_FIELDS:
             if k in meta and meta[k] not in (None, ""):
                 e[k] = meta[k]
+        # auto-suggest the P01/P59 checksum plugin for calibration bins of the
+        # family it covers (per the DLL's own strings: "GM P01/P59", 512kB/1MB).
+        # Only Car-LS / P59 -- NOT E38/Duramax/TCM/512K-PCM, different families.
+        if (not e.get("tools") and e.get("type") in ("stock", "tune")
+                and e.get("ecu") in AUTO_TOOL_ECUS and PLUGIN_PATH in found):
+            e["tools"] = [PLUGIN_PATH]
+            e["tools_suggested"] = True
         if e.get("type") and e["type"] not in VALID_TYPES:
             print(f"  WARNING: unknown type '{e['type']}' on {rel}")
         # verify claimed IDs against bin content (calibration images only --
