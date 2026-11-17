@@ -100,6 +100,7 @@ files:
     source: "downloaded from gearhead-efi.com (owner's collection)"
     source_url: "https://www.gearhead-efi.com"
     tags: [gto, ls1, m6]
+    aliases: ["2005GTO_200572977.bin"]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
     notes: "OS 12587604 embedded. Byte-identical to 2005GTO_200572977.bin (that file's 2005/72977 label is wrong - see its entry)."
 
@@ -380,6 +381,7 @@ files:
     source: "downloaded from gearhead-efi.com (owner's collection)"
     source_url: "https://www.gearhead-efi.com"
     tags: [escalade, lq4, 6.0, 4x4, e38]
+    aliases: ["05 Escalade 6.0L 4x4 os12592618 (1).bin"]
     notes: "OS 12592618 embedded. A byte-identical '(1)' copy also exists in the archive."
 
   - path: "GM/E38/12592618/stock/05 Hummer H2 6.0 LQ4 os12592618.bin"
@@ -424,6 +426,7 @@ files:
     source: "downloaded from gearhead-efi.com (owner's collection)"
     source_url: "https://www.gearhead-efi.com"
     tags: [impala, la1, 3.4]
+    aliases: ["2005 Impala LA1 12594527.bin"]
     notes: "Filename ID 12594527 is NOT embedded; bin embeds 12594521 (likely the CAL ID - one of the two is the OS, the other the CAL). Verify in TunerPro. Byte-identical copy: 2005 Impala LA1 12594527.bin."
 
   - path: "GM/TCM/n-a/stock/05TRAILBLAZER 5.3 TCM.bin"
@@ -548,6 +551,7 @@ files:
     source: "downloaded from gearhead-efi.com (owner's collection)"
     source_url: "https://www.gearhead-efi.com"
     tags: [monte-carlo, l67, 3.8, supercharged]
+    aliases: ["2005 Monte Carlo L67 12600191 (1).bin"]
     notes: "Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID). Verify which is OS vs CAL."
 
   - path: "GM/Unverified/12595726/stock/2005 TrailblazerI6Auto.bin"

@@ -9,3 +9,6 @@ __pycache__/
 # local scratch
 _test*/
 _testmeta.yaml
+
+# forum post drafts and screenshots (personal, not part of the archive)
+writeup/

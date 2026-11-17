@@ -31,7 +31,7 @@ except ImportError:
 META_FIELDS = [
     "type", "manufacturer", "ecu", "module", "os_id", "cal_id",
     "vehicle", "engine", "years", "transmission",
-    "description", "source", "source_url", "author", "xdf", "tools", "tags",
+    "description", "source", "source_url", "author", "aliases", "xdf", "tools", "tags",
     "verified", "notes", "duplicate_of",
 ]
 

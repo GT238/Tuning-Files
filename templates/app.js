@@ -26,7 +26,7 @@ function badge(t) {
 function haystack(f) {
   return [f.name, f.path, f.manufacturer, f.ecu, f.module, f.os_id, f.cal_id,
           f.vehicle, f.engine, f.years, f.transmission, f.description, f.notes,
-          f.author, f.source, (f.tags || []).join(" ")].join(" ").toLowerCase();
+          f.author, f.source, (f.tags || []).join(" "), (f.aliases || []).join(" ")].join(" ").toLowerCase();
 }
 
 function filtered() {
@@ -89,6 +89,7 @@ function rowHtml(f) {
     <td class="file">${badge(f.type)}<br>
       <a href="${esc(f.download_url)}" download title="${esc(f.path)}">${esc(f.name)}</a>
       <div class="path">${esc(f.path)}</div>
+      ${(f.aliases || []).length ? `<div class="sub">aka: ${esc(f.aliases.join(" · "))}</div>` : ""}
       ${f.needs_metadata ? '<span class="badge t-missing">needs info</span>' : ""}
       ${f.verified ? '<span class="badge t-stock">verified</span>' : ""}
     </td>
