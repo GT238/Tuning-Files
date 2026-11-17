@@ -194,7 +194,7 @@ sudo cp deploy/tuning-files-upload.service /etc/systemd/system/
 sudo systemctl enable --now tuning-files-upload
 ```
 
-The Flask app binds to 127.0.0.1:5000; only `/submit` and `/review` are exposed
+The Flask app binds to 127.0.0.1:5001; only `/submit` and `/review` are exposed
 through nginx. `deploy/deploy.sh` syncs `app.py` + `app_templates/` too,
 restarts the service, and deliberately **excludes `files/_inbox/`** from rsync
 so pending submissions on the server are never wiped by a deploy.

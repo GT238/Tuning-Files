@@ -14,7 +14,7 @@ Runs alongside the static catalog; nginx proxies /submit and /review here.
 Config (env vars, or an app.env file loaded by systemd):
   ARCHIVE_ROOT   project root (default: directory containing this file)
   REVIEW_KEY     secret guarding /review
-  PORT           listen port (default 5000, bound to 127.0.0.1)
+  PORT           listen port (default 5001, bound to 127.0.0.1)
 
 Dependencies: flask, pyyaml  (pip install -r requirements.txt)
 """
@@ -275,4 +275,4 @@ def shutil_move(src, dst):
 
 if __name__ == "__main__":
     INBOX.mkdir(parents=True, exist_ok=True)
-    app.run(host="127.0.0.1", port=int(os.environ.get("PORT", 5000)))
+    app.run(host="127.0.0.1", port=int(os.environ.get("PORT", 5001)))
