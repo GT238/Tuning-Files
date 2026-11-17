@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-17T15:16:13+00:00",
+ "generated": "2026-11-17T15:35:03+00:00",
  "count": 55,
  "files_url": "/Tuning-Files/files/",
  "submit_url": "https://github.com/GT238/Tuning-Files/issues",
@@ -162,7 +162,7 @@
     2002,
     2003
    ],
-   "notes": "Corvette C5 application. Same file size as the 12593358 Corvette definition but different content (different OS). No bins yet."
+   "notes": "CAUTION: legacy BINARY-format definition (not the modern XML XDF) - verify TunerPro loads it before relying on it. Near-twin of the 12593358 definition: same size, differs in only 142 of 623,503 bytes, likely a small revision of the same work. No OS IDs embedded, so the filename is the only evidence this defines OS 12221588. No bins for this OS yet."
   },
   {
    "path": "GM/512K-PCM/12225074/xdf/Operating System 12225074 - 512Kb PCM - 2001 to 2004 Holden model years.xdf",
@@ -232,7 +232,7 @@
     2002,
     2003
    ],
-   "notes": "Corvette C5 application, later OS than 12221588. No bins yet."
+   "notes": "CAUTION: legacy BINARY-format definition (not the modern XML XDF) - verify TunerPro loads it before relying on it. Near-twin of the 12221588 definition: same size, differs in only 142 of 623,503 bytes, likely a small revision of the same work. No OS IDs embedded, so the filename is the only evidence this defines OS 12593358. No bins for this OS yet."
   },
   {
    "path": "GM/512K-PCM/1290003/xdf/COS 3 - 1290003 - 512Kb PCM - based on 12225074 - 2001 to 2004 Holden model years.xdf",
@@ -286,7 +286,7 @@
     "m6",
     "verify-attribution"
    ],
-   "notes": "OS 12587603 is embedded in the bin. That OS is shared across cars and trucks (OSs are year/platform-wide, not vehicle-specific - see the README primer), and this file differs from the 2004 Sierra LM7 bin on the same OS - different calibration bytes, consistent with a different vehicle application of one OS. Attribution per filename; confirm the CAL ID in TunerPro/EFILive before flashing.",
+   "notes": "OS 12587603 is embedded in the bin. That OS is shared across cars and trucks (OSs are year/platform-wide, not vehicle-specific - see the README primer); the other calibration in this archive on the same OS is a car application, which is normal. Attribution per filename; confirm the CAL ID in TunerPro/EFILive before flashing.",
    "os_id_in_bin": true
   },
   {
@@ -671,7 +671,7 @@
     "4x4",
     "e38"
    ],
-   "notes": "OS 12587603 embedded (matches filename). That OS is shared across cars and trucks (year/platform-wide, not vehicle-specific); the '04 Corvette bin in this archive is a different calibration on the same OS, which is normal.",
+   "notes": "OS 12587603 embedded (matches filename). That OS is shared across cars and trucks (year/platform-wide, not vehicle-specific); the other calibration in this archive on the same OS is a different application, which is normal.",
    "os_id_in_bin": true
   },
   {

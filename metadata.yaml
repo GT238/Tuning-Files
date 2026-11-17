@@ -67,7 +67,7 @@ files:
     source_url: "https://www.gearhead-efi.com"
     tags: [corvette, ls, m6, verify-attribution]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
-    notes: "OS 12587603 is embedded in the bin. That OS is shared across cars and trucks (OSs are year/platform-wide, not vehicle-specific - see the README primer), and this file differs from the 2004 Sierra LM7 bin on the same OS - different calibration bytes, consistent with a different vehicle application of one OS. Attribution per filename; confirm the CAL ID in TunerPro/EFILive before flashing."
+    notes: "OS 12587603 is embedded in the bin. That OS is shared across cars and trucks (OSs are year/platform-wide, not vehicle-specific - see the README primer); the other calibration in this archive on the same OS is a car application, which is normal. Attribution per filename; confirm the CAL ID in TunerPro/EFILive before flashing."
 
   - path: "GM/Car-LS/12592433/stock/'04 CTS-V LS6 M6 os12592433.bin"
     type: stock
@@ -178,7 +178,7 @@ files:
     description: "Stock PCM calibration, 2004 Sierra 1500 4x4 LM7 4L60E"
     source: "community repost (per filename 'truck_copy')"
     tags: [lm7, 5.3, 4x4, e38]
-    notes: "OS 12587603 embedded (matches filename). That OS is shared across cars and trucks (year/platform-wide, not vehicle-specific); the '04 Corvette bin in this archive is a different calibration on the same OS, which is normal."
+    notes: "OS 12587603 embedded (matches filename). That OS is shared across cars and trucks (year/platform-wide, not vehicle-specific); the other calibration in this archive on the same OS is a different application, which is normal."
 
   # ============================== 2005 ===================================
   - path: "GM/Car-LS/12592618/stock/'05 Cadillac CTS-V LS6 M6 os12592618.bin"
@@ -740,7 +740,7 @@ files:
     source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
     source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, corvette, 2001, 2002, 2003]
-    notes: "Corvette C5 application. Same file size as the 12593358 Corvette definition but different content (different OS). No bins yet."
+    notes: "CAUTION: legacy BINARY-format definition (not the modern XML XDF) - verify TunerPro loads it before relying on it. Near-twin of the 12593358 definition: same size, differs in only 142 of 623,503 bytes, likely a small revision of the same work. No OS IDs embedded, so the filename is the only evidence this defines OS 12221588. No bins for this OS yet."
 
   - path: "GM/512K-PCM/12225074/xdf/Operating System 12225074 - 512Kb PCM - 2001 to 2004 Holden model years.xdf"
     type: xdf
@@ -784,7 +784,7 @@ files:
     source: "downloaded from gearhead-efi.com (from the user's 'Bin Definitions' folder)"
     source_url: "https://www.gearhead-efi.com"
     tags: [xdf, 512k, corvette, 2001, 2002, 2003]
-    notes: "Corvette C5 application, later OS than 12221588. No bins yet."
+    notes: "CAUTION: legacy BINARY-format definition (not the modern XML XDF) - verify TunerPro loads it before relying on it. Near-twin of the 12221588 definition: same size, differs in only 142 of 623,503 bytes, likely a small revision of the same work. No OS IDs embedded, so the filename is the only evidence this defines OS 12593358. No bins for this OS yet."
 
   - path: "GM/Various/misc/xdf/Lean Cruise.xdf"
     type: xdf
