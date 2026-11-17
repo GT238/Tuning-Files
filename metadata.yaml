@@ -102,7 +102,7 @@ files:
     tags: [gto, ls1, m6]
     aliases: ["2005GTO_200572977.bin"]
     tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
-    notes: "OS 12587604 embedded. Byte-identical to 2005GTO_200572977.bin (that file's 2005/72977 label is wrong - see its entry)."
+    notes: "OS 12587604 embedded. Former byte-identical copy '2005GTO_200572977.bin' (mislabeled '2005') was deleted - the name is kept as an alias."
 
   - path: "GM/E38/12585950/stock/04 Chevy 2500 4x4 LQ4 6.0L os12585950.bin"
     type: stock
@@ -351,22 +351,6 @@ files:
     tags: [escalade, suspect, odd-size]
     notes: "Only 512KB (E38 truck PCMs are 1MB) and NO OS ID embedded anywhere in the file - cannot confirm the 12592618 claim. Possibly truncated, corrupt, or a different module entirely. Do not flash; verify first."
 
-  - path: "GM/E38/12592618/stock/05 Escalade 6.0L 4x4 os12592618 (1).bin"
-    type: stock
-    manufacturer: GM
-    ecu: E38
-    module: PCM
-    os_id: "12592618"
-    xdf: "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf"
-    vehicle: "Cadillac Escalade 4x4"
-    engine: "LQ4 6.0L"
-    years: "2005"
-    description: "Stock PCM calibration, 2005 Escalade 4x4 6.0L"
-    source: "downloaded from gearhead-efi.com (owner's collection)"
-    source_url: "https://www.gearhead-efi.com"
-    tags: [escalade, lq4, 6.0, 4x4, e38]
-    notes: "Windows '(1)' copy - byte-identical to the other Escalade bin in this archive (see duplicate link on the site)."
-
   - path: "GM/E38/12592618/stock/05 Escalade 6.0L 4x4 os12592618.bin"
     type: stock
     manufacturer: GM
@@ -382,7 +366,7 @@ files:
     source_url: "https://www.gearhead-efi.com"
     tags: [escalade, lq4, 6.0, 4x4, e38]
     aliases: ["05 Escalade 6.0L 4x4 os12592618 (1).bin"]
-    notes: "OS 12592618 embedded. A byte-identical '(1)' copy also exists in the archive."
+    notes: "OS 12592618 embedded. Former byte-identical '(1)' copy was deleted; the name is kept as an alias."
 
   - path: "GM/E38/12592618/stock/05 Hummer H2 6.0 LQ4 os12592618.bin"
     type: stock
@@ -427,7 +411,7 @@ files:
     source_url: "https://www.gearhead-efi.com"
     tags: [impala, la1, 3.4]
     aliases: ["2005 Impala LA1 12594527.bin"]
-    notes: "Filename ID 12594527 is NOT embedded; bin embeds 12594521 (likely the CAL ID - one of the two is the OS, the other the CAL). Verify in TunerPro. Byte-identical copy: 2005 Impala LA1 12594527.bin."
+    notes: "Filename ID 12594527 is NOT embedded; bin embeds 12594521 (likely the CAL ID - one of the two is the OS, the other the CAL). Verify in TunerPro. Former byte-identical copy '2005 Impala LA1 12594527.bin' was deleted; the name is kept as an alias."
 
   - path: "GM/TCM/n-a/stock/05TRAILBLAZER 5.3 TCM.bin"
     type: stock
@@ -490,22 +474,6 @@ files:
     tags: [grand-am, la1, 3.4]
     notes: "Filename ID 12594385 NOT embedded; bin embeds 12594383 (likely the CAL ID). Verify which is OS vs CAL."
 
-  - path: "GM/Car-V6/12594527/stock/2005 Impala LA1 12594527.bin"
-    type: stock
-    manufacturer: GM
-    ecu: Car-V6
-    module: PCM
-    os_id: "12594527"
-    cal_id: "12594521"
-    vehicle: "Chevrolet Impala"
-    engine: "LA1 3.4L V6"
-    years: "2005"
-    description: "Stock PCM calibration, 2005 Impala 3.4L"
-    source: "downloaded from gearhead-efi.com (owner's collection)"
-    source_url: "https://www.gearhead-efi.com"
-    tags: [impala, la1, 3.4]
-    notes: "Byte-identical to 05_Impala_3400_LA1 os 12594527.bin (duplicate link). Same OS/CAL ambiguity - see that entry."
-
   - path: "GM/Duramax-LLY/15193885/stock/2005 LLY_15193885.bin"
     type: stock
     manufacturer: GM
@@ -520,22 +488,6 @@ files:
     source_url: "https://www.gearhead-efi.com"
     tags: [duramax, lly, diesel, 6.6]
     notes: "Diesel ECM (Bosch common-rail) - outside EFILive/TunerPro LS tooling (HP Tuners territory). Bin embeds the 15193863-15193885 ID series including 15193885."
-
-  - path: "GM/Car-V6/12600191/stock/2005 Monte Carlo L67 12600191 (1).bin"
-    type: stock
-    manufacturer: GM
-    ecu: Car-V6
-    module: PCM
-    os_id: "12600191"
-    cal_id: "12600185"
-    vehicle: "Chevrolet Monte Carlo (SS)"
-    engine: "L67 3.8L supercharged V6"
-    years: "2005"
-    description: "Stock PCM calibration, 2005 Monte Carlo L67"
-    source: "downloaded from gearhead-efi.com (owner's collection)"
-    source_url: "https://www.gearhead-efi.com"
-    tags: [monte-carlo, l67, 3.8, supercharged]
-    notes: "Windows '(1)' copy - byte-identical to the other Monte Carlo bin. Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID)."
 
   - path: "GM/Car-V6/12600191/stock/2005 Monte Carlo L67 12600191.bin"
     type: stock
@@ -552,7 +504,7 @@ files:
     source_url: "https://www.gearhead-efi.com"
     tags: [monte-carlo, l67, 3.8, supercharged]
     aliases: ["2005 Monte Carlo L67 12600191 (1).bin"]
-    notes: "Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID). Verify which is OS vs CAL."
+    notes: "Former byte-identical '(1)' copy was deleted; the name is kept as an alias. Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID). Verify which is OS vs CAL."
 
   - path: "GM/Unverified/12595726/stock/2005 TrailblazerI6Auto.bin"
     type: stock
@@ -583,23 +535,6 @@ files:
     tags: [venture, la1, 3.4]
     notes: "No OS ID in filename; 12594380 read from bin content."
 
-  - path: "GM/Car-LS/12587604/stock/2005GTO_200572977.bin"
-    type: stock
-    manufacturer: GM
-    ecu: Car-LS
-    module: PCM
-    os_id: "12587604"
-    vehicle: "Pontiac GTO (per bin content - see notes)"
-    engine: "LS1 5.7L"
-    years: "2004"
-    description: "Mislabeled download of the 2004 GTO calibration"
-    source: "downloaded from gearhead-efi.com (owner's collection)"
-    source_url: "https://www.gearhead-efi.com"
-    tags: [gto, ls1, mislabeled]
-    tools: ["GM/P59/tools/GM-P01-P59-checksum-plugin.dll"]
-    notes: "BYTE-IDENTICAL to '04 GTO M6 os12587604.bin - the '2005/72977' label is wrong (2005 GTO = LS2, a different engine). This is a mislabeled copy of the 2004 GTO calibration. The '04 file is canonical; this one can be deleted."
-
-  # ============ XDF definitions + checksum plugin (from "Downloaded FIles", 2025-07-17) =========
   - path: "GM/P59/12587811/xdf/12587811 OS 2025-07-17.xdf"
     type: xdf
     manufacturer: GM

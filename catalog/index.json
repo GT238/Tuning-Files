@@ -1,6 +1,6 @@
 {
- "generated": "2026-11-17T15:09:46+00:00",
- "count": 59,
+ "generated": "2026-11-17T15:16:13+00:00",
+ "count": 55,
  "files_url": "/Tuning-Files/files/",
  "submit_url": "https://github.com/GT238/Tuning-Files/issues",
  "files": [
@@ -320,39 +320,8 @@
     "ls1",
     "m6"
    ],
-   "notes": "OS 12587604 embedded. Byte-identical to 2005GTO_200572977.bin (that file's 2005/72977 label is wrong - see its entry).",
+   "notes": "OS 12587604 embedded. Former byte-identical copy '2005GTO_200572977.bin' (mislabeled '2005') was deleted - the name is kept as an alias.",
    "os_id_in_bin": true
-  },
-  {
-   "path": "GM/Car-LS/12587604/stock/2005GTO_200572977.bin",
-   "name": "2005GTO_200572977.bin",
-   "size": 1048576,
-   "sha256": "afcf0548ec44cb049d8b8116dc4329108f31c16e9c0400427cef230d985eba2a",
-   "modified": "2020-11-26T00:33:50+00:00",
-   "download_url": "/Tuning-Files/files/GM/Car-LS/12587604/stock/2005GTO_200572977.bin",
-   "needs_metadata": false,
-   "type": "stock",
-   "manufacturer": "GM",
-   "ecu": "Car-LS",
-   "module": "PCM",
-   "os_id": "12587604",
-   "vehicle": "Pontiac GTO (per bin content - see notes)",
-   "engine": "LS1 5.7L",
-   "years": "2004",
-   "description": "Mislabeled download of the 2004 GTO calibration",
-   "source": "downloaded from gearhead-efi.com (owner's collection)",
-   "source_url": "https://www.gearhead-efi.com",
-   "tools": [
-    "GM/P59/tools/GM-P01-P59-checksum-plugin.dll"
-   ],
-   "tags": [
-    "gto",
-    "ls1",
-    "mislabeled"
-   ],
-   "notes": "BYTE-IDENTICAL to '04 GTO M6 os12587604.bin - the '2005/72977' label is wrong (2005 GTO = LS2, a different engine). This is a mislabeled copy of the 2004 GTO calibration. The '04 file is canonical; this one can be deleted.",
-   "os_id_in_bin": true,
-   "duplicate_of": "GM/Car-LS/12587604/stock/'04 GTO M6 os12587604.bin"
   },
   {
    "path": "GM/Car-LS/12587604/stock/Read 2004 GTO.bin",
@@ -529,70 +498,9 @@
     "la1",
     3.4
    ],
-   "notes": "Filename ID 12594527 is NOT embedded; bin embeds 12594521 (likely the CAL ID - one of the two is the OS, the other the CAL). Verify in TunerPro. Byte-identical copy: 2005 Impala LA1 12594527.bin.",
+   "notes": "Filename ID 12594527 is NOT embedded; bin embeds 12594521 (likely the CAL ID - one of the two is the OS, the other the CAL). Verify in TunerPro. Former byte-identical copy '2005 Impala LA1 12594527.bin' was deleted; the name is kept as an alias.",
    "os_id_in_bin": false,
    "cal_id_in_bin": true
-  },
-  {
-   "path": "GM/Car-V6/12594527/stock/2005 Impala LA1 12594527.bin",
-   "name": "2005 Impala LA1 12594527.bin",
-   "size": 524288,
-   "sha256": "d5fb62393c04f048f3e0b37f2cfe6004dcbee110f46982b6b65e23bf52416fbb",
-   "modified": "2020-11-26T00:33:44+00:00",
-   "download_url": "/Tuning-Files/files/GM/Car-V6/12594527/stock/2005%20Impala%20LA1%2012594527.bin",
-   "needs_metadata": false,
-   "type": "stock",
-   "manufacturer": "GM",
-   "ecu": "Car-V6",
-   "module": "PCM",
-   "os_id": "12594527",
-   "cal_id": "12594521",
-   "vehicle": "Chevrolet Impala",
-   "engine": "LA1 3.4L V6",
-   "years": "2005",
-   "description": "Stock PCM calibration, 2005 Impala 3.4L",
-   "source": "downloaded from gearhead-efi.com (owner's collection)",
-   "source_url": "https://www.gearhead-efi.com",
-   "tags": [
-    "impala",
-    "la1",
-    3.4
-   ],
-   "notes": "Byte-identical to 05_Impala_3400_LA1 os 12594527.bin (duplicate link). Same OS/CAL ambiguity - see that entry.",
-   "os_id_in_bin": false,
-   "cal_id_in_bin": true,
-   "duplicate_of": "GM/Car-V6/12594527/stock/05_Impala_3400_LA1  os 12594527.bin"
-  },
-  {
-   "path": "GM/Car-V6/12600191/stock/2005 Monte Carlo L67 12600191 (1).bin",
-   "name": "2005 Monte Carlo L67 12600191 (1).bin",
-   "size": 524288,
-   "sha256": "c334c495096b22992527e6d1b4fc2eac21ed019b9a241c68bda256c5d3ffe093",
-   "modified": "2020-11-26T00:34:23+00:00",
-   "download_url": "/Tuning-Files/files/GM/Car-V6/12600191/stock/2005%20Monte%20Carlo%20L67%2012600191%20%281%29.bin",
-   "needs_metadata": false,
-   "type": "stock",
-   "manufacturer": "GM",
-   "ecu": "Car-V6",
-   "module": "PCM",
-   "os_id": "12600191",
-   "cal_id": "12600185",
-   "vehicle": "Chevrolet Monte Carlo (SS)",
-   "engine": "L67 3.8L supercharged V6",
-   "years": "2005",
-   "description": "Stock PCM calibration, 2005 Monte Carlo L67",
-   "source": "downloaded from gearhead-efi.com (owner's collection)",
-   "source_url": "https://www.gearhead-efi.com",
-   "tags": [
-    "monte-carlo",
-    "l67",
-    3.8,
-    "supercharged"
-   ],
-   "notes": "Windows '(1)' copy - byte-identical to the other Monte Carlo bin. Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID).",
-   "os_id_in_bin": false,
-   "cal_id_in_bin": true,
-   "duplicate_of": "GM/Car-V6/12600191/stock/2005 Monte Carlo L67 12600191.bin"
   },
   {
    "path": "GM/Car-V6/12600191/stock/2005 Monte Carlo L67 12600191.bin",
@@ -623,7 +531,7 @@
     3.8,
     "supercharged"
    ],
-   "notes": "Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID). Verify which is OS vs CAL.",
+   "notes": "Former byte-identical '(1)' copy was deleted; the name is kept as an alias. Filename ID 12600191 NOT embedded; bin embeds 12600185 (likely CAL ID). Verify which is OS vs CAL.",
    "os_id_in_bin": false,
    "cal_id_in_bin": true
   },
@@ -1115,37 +1023,6 @@
    "os_id_in_bin": true
   },
   {
-   "path": "GM/E38/12592618/stock/05 Escalade 6.0L 4x4 os12592618 (1).bin",
-   "name": "05 Escalade 6.0L 4x4 os12592618 (1).bin",
-   "size": 1048576,
-   "sha256": "62f530c2a9bff65ab69ead059e01a527d568a9b489aea2570d1ace84097b66b9",
-   "modified": "2020-11-26T00:34:08+00:00",
-   "download_url": "/Tuning-Files/files/GM/E38/12592618/stock/05%20Escalade%206.0L%204x4%20os12592618%20%281%29.bin",
-   "needs_metadata": false,
-   "type": "stock",
-   "manufacturer": "GM",
-   "ecu": "E38",
-   "module": "PCM",
-   "os_id": "12592618",
-   "vehicle": "Cadillac Escalade 4x4",
-   "engine": "LQ4 6.0L",
-   "years": "2005",
-   "description": "Stock PCM calibration, 2005 Escalade 4x4 6.0L",
-   "source": "downloaded from gearhead-efi.com (owner's collection)",
-   "source_url": "https://www.gearhead-efi.com",
-   "xdf": "GM/E38/12592618/xdf/Operating System 12592618 1Mb PCM- 2005 VR1.xdf",
-   "tags": [
-    "escalade",
-    "lq4",
-    6.0,
-    "4x4",
-    "e38"
-   ],
-   "notes": "Windows '(1)' copy - byte-identical to the other Escalade bin in this archive (see duplicate link on the site).",
-   "os_id_in_bin": true,
-   "duplicate_of": "GM/E38/12592618/stock/05 Escalade 6.0L 4x4 os12592618.bin"
-  },
-  {
    "path": "GM/E38/12592618/stock/05 Escalade 6.0L 4x4 os12592618.bin",
    "name": "05 Escalade 6.0L 4x4 os12592618.bin",
    "size": 1048576,
@@ -1175,7 +1052,7 @@
     "4x4",
     "e38"
    ],
-   "notes": "OS 12592618 embedded. A byte-identical '(1)' copy also exists in the archive.",
+   "notes": "OS 12592618 embedded. Former byte-identical '(1)' copy was deleted; the name is kept as an alias.",
    "os_id_in_bin": true
   },
   {
