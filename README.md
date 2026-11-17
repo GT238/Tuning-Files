@@ -219,6 +219,7 @@ What's automatic vs human for every file:
 
 Calibration files are proprietary data owned by the OEMs. This archive
 operates on the community norm of personal/educational use. The site footer
-carries a disclaimer and a takedown contact; honor takedown requests promptly.
-Don't upload files you don't have the right to share, and keep provenance
-(`source`) in the metadata so trust is earned, not assumed.
+carries a disclaimer; takedown/ownership requests are routed through GitHub
+issues (the Issues tab of this repo) and are honored promptly. Don't upload
+files you don't have the right to share, and keep provenance (`source`) in
+the metadata so trust is earned, not assumed.
