@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-17T15:35:03+00:00",
+ "generated": "2026-11-17T15:51:36+00:00",
  "count": 55,
  "files_url": "/Tuning-Files/files/",
  "submit_url": "https://github.com/GT238/Tuning-Files/issues",
@@ -162,7 +162,7 @@
     2002,
     2003
    ],
-   "notes": "CAUTION: legacy BINARY-format definition (not the modern XML XDF) - verify TunerPro loads it before relying on it. Near-twin of the 12593358 definition: same size, differs in only 142 of 623,503 bytes, likely a small revision of the same work. No OS IDs embedded, so the filename is the only evidence this defines OS 12221588. No bins for this OS yet."
+   "notes": "Legacy BINARY-format definition (not the modern XML XDF) but VERIFIED to load in TunerPro - full parameter tree renders (user-tested 2026-11-17, against an 'Impala_LS2_Modified_v1.bin' test bin). Near-twin of the 12593358 definition: same size, differs in only 142 of 623,503 bytes, likely a small revision of the same work. No OS IDs embedded, so the filename is the only evidence this defines OS 12221588. No bins for this OS yet."
   },
   {
    "path": "GM/512K-PCM/12225074/xdf/Operating System 12225074 - 512Kb PCM - 2001 to 2004 Holden model years.xdf",
