@@ -46,10 +46,19 @@ select, .needs {
 
 #count { color: var(--muted); font-size: .85rem; margin: 8px 0; }
 
-.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
-table { border-collapse: collapse; width: 100%; font-size: .85rem; }
+.table-scroll {
+  overflow: auto;               /* own scroll pane so the sticky header works */
+  max-height: calc(100vh - 150px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: .85rem; }
 th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { position: sticky; top: 0; background: var(--panel); }
+th {
+  position: sticky; top: 0; z-index: 1;
+  background: var(--panel);
+  box-shadow: 0 1px 0 var(--line);   /* keeps the bottom rule visible while rows scroll under */
+}
 tbody tr:nth-child(even) { background: rgba(255, 255, 255, .02); }
 tbody tr:hover { background: rgba(255, 255, 255, .05); }
 
